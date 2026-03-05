@@ -6,7 +6,7 @@ This repository manages Codelabs content for a GitHub Copilot workshop.
 
 The workshop content can be accessed at the following URL:
 
-https://moulongzhang.github.io/2026-Github-Copilot-Workshop/github-copilot-workshop
+https://moulongzhang.github.io/2026-Github-Copilot-Workshop-English/github-copilot-workshop
 
 
 ## 📚 Overview
