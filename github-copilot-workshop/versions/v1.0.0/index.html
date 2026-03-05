@@ -1,0 +1,841 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>GitHub Copilot Workshop</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/claat-public/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="UA-49880327-14" ga4id=""></google-codelab-analytics>
+  <google-codelab codelab-gaid=""
+                  codelab-ga4id=""
+                  id="github-copilot-workshop"
+                  title="GitHub Copilot Workshop"
+                  environment="web"
+                  feedback-link="https://example.com/feedback">
+    
+      <google-codelab-step label="About This Workshop" duration="5">
+        <p>Welcome to the GitHub Copilot Workshop! In this workshop, you will learn how to use GitHub Copilot to explain and improve code. GitHub Copilot Chat allows you to interact with AI through a chat experience. Let&#39;s learn how to use GitHub Copilot through this workshop!</p>
+<p class="image-container"><img alt="GitHub Copilot Logo" src="../../img/dcd9c52ce37f5b19.png"></p>
+<h2 is-upgraded>Today&#39;s Goals</h2>
+<ul>
+<li>Understand the various features of GitHub Copilot</li>
+<li>Use Agent Mode to develop a new application from scratch</li>
+</ul>
+<h2 is-upgraded>Prerequisites</h2>
+<ul>
+<li>Visual Studio Code is installed</li>
+<li>You have a GitHub Copilot license</li>
+<li>You have a GitHub account</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Project Setup" duration="15">
+        <p>In this workshop, we will use the following GitHub repository:</p>
+<p><strong>Project URL</strong>: https://github.com/moulongzhang/2026-Github-Copilot-Workshop-Python</p>
+<h2 is-upgraded>Step 1: Create a Repository from the Template</h2>
+<p>First, open the project URL above in your browser and create your own repository from the template:</p>
+<ol type="1">
+<li>Open the project URL (https://github.com/moulongzhang/2026-Github-Copilot-Workshop-Python) in your browser</li>
+<li>Click the <strong>Use this template</strong> button in the upper right and select <strong>Create a new repository</strong></li>
+</ol>
+<p class="image-container"><img alt="Click Use this template button" src="../../img/f30b349b9da9c209.png"></p>
+<ol type="1" start="3">
+<li>On the repository creation screen, enter a repository name and click the <strong>Create repository</strong> button</li>
+</ol>
+<p class="image-container"><img alt="Click Create repository button" src="../../img/9b42f25710076003.png"></p>
+<aside class="warning"><p><strong>⚠️ Important</strong>: When creating the repository, make sure to select <strong>&#34;Public&#34;</strong> for the <strong>Visibility</strong> setting. Some Copilot features and GitHub Actions may not work correctly with private repositories.</p>
+</aside>
+<p>Once the template creation is complete, a new repository will be created under your GitHub account.</p>
+<h2 is-upgraded>Step 2: Set Up the Development Environment</h2>
+<p>Use the repository you created to set up a development environment with GitHub Codespaces:</p>
+<ol type="1">
+<li>Go to your repository page (<code>https://github.com/[your-username]/2026-Github-Copilot-Workshop-Python</code>)</li>
+<li>Click the green <strong>Code</strong> button</li>
+<li>Select the <strong>Codespaces</strong> tab</li>
+<li>Click <strong>Create codespace on main</strong></li>
+</ol>
+<p class="image-container"><img alt="Codespaces Setup" src="../../img/da697969a846a2d4.png"></p>
+<aside class="special"><p><strong>Tip</strong>: Using Codespaces launches a VS Code-like environment in your browser, allowing you to start development immediately. This project includes a <code>.devcontainer/devcontainer.json</code> file that automatically configures the following when Codespaces starts:</p>
+<ul>
+<li><strong>Python 3.11 environment</strong>: The Python environment needed for development</li>
+<li><strong>GitHub Copilot extension</strong>: AI-powered code completion and chat features</li>
+<li><strong>CodeTour extension</strong>: Guided tour functionality for the project</li>
+</ul>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Let&#39;s Build a Pomodoro Timer" duration="30">
+        <p>So far, you have learned the basic ways to use GitHub Copilot in VS Code. Now let&#39;s actually develop an application.</p>
+<p>In this hands-on session, we will develop a Pomodoro timer application. This application will have the ability to set work and break durations and manage a timer.</p>
+<p>We aim to create an application with a UI like the one below.</p>
+<p class="image-container"><img alt="Pomodoro Timer UI" src="../../img/8e24c2d7e6a91e1b.png"></p>
+<p>First, let&#39;s create a new Python file in VS Code. Since we want to create this as a web application, we&#39;ll use Flask. Let&#39;s name the main file &#34;app.py&#34;.</p>
+<h2 is-upgraded>Project Overview</h2>
+<p>We will create a web timer application for the Pomodoro Technique.</p>
+<h2 is-upgraded>Required Features</h2>
+<ul>
+<li>25-minute work timer</li>
+<li>5-minute break timer</li>
+<li>Start, stop, and reset the timer</li>
+<li>Progress display and statistics</li>
+<li>Browser notifications and sound alerts</li>
+<li>Responsive Web UI</li>
+</ul>
+<aside class="special"><p><strong>What is a Pomodoro Timer?</strong>: The Pomodoro Technique is a time management method devised by Francesco Cirillo in the 1980s. It involves working in sets of &#34;25 minutes of work + 5 minutes of break&#34; (= 1 Pomodoro), repeating this cycle to maintain focus and work efficiently. For more details, see <a href="https://en.wikipedia.org/wiki/Pomodoro_Technique" target="_blank">Wikipedia: Pomodoro Technique</a>.</p>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Thinking Through the Pomodoro Timer Design" duration="10">
+        <p>Rather than jumping straight into implementation, let&#39;s first consult Copilot about the approach and design to follow. From here on, we will proceed entirely in Agent Mode.</p>
+<h2 is-upgraded>Switching to Agent Mode</h2>
+<p>Select &#34;Agent&#34; from the Copilot Chat mode selector. The agent understands user intent and can execute tasks more autonomously.</p>
+<p class="image-container"><img alt="Agent Mode Selection 2" style="width: 600.00px" src="../../img/bcc926772d6a58dd.png">   </p>
+<p class="image-container"><img alt="Agent Mode Selection" style="width: 600.00px" src="../../img/428f81215165ebb9.png"></p>
+<h2 is-upgraded>Design Consultation</h2>
+<p>When creating a web application with a UI like this, a useful feature is the ability to upload images to Copilot Chat. This allows Copilot to understand the UI image of your application.</p>
+<p>First, save the UI image from the previous page as <code>pomodoro.png</code> in the project root. Then click <code>Add Context</code> in the chat input area and select &#34;Image from Clipboard&#34; or &#34;Files &amp; Folders...&#34;. Then select the UI image.</p>
+<p class="image-container"><img alt="VS Code Copilot Chat Context Menu" src="../../img/32ba4d287403b2f9.png"></p>
+<p class="image-container"><img alt="VS Code Copilot Chat Context Menu" src="../../img/aadb91ba110fa522.png"></p>
+<p>Once the image is uploaded, it will appear in the Copilot Chat window.</p>
+<p>Now, try entering the following prompt.</p>
+<pre><code>I plan to create a Pomodoro timer web app for this project. The attached image is the UI mock for the app. Please propose an architecture recommendation for building this app using Flask and HTML/CSS/JavaScript.
+</code></pre>
+<p>Copilot will then suggest a recommended web application architecture.</p>
+<p>If you see areas for improvement or points that haven&#39;t been considered in this architecture, go ahead and point them out. For example:</p>
+<pre><code>Considering ease of unit testing, please identify any improvements or additions needed in the current architecture.
+</code></pre>
+<p>Once the architecture design is finalized through this exchange, let&#39;s save the content to a file. This way, you can reference the same architecture content even when opening a new chat session.</p>
+<pre><code>The architecture has been finalized through our conversation so far. Based on our discussion, please create a file called architecture.md in the project root that summarizes the web application architecture proposal.
+</code></pre>
+<aside class="special"><p>When you reach a good stopping point in your Copilot Chat conversation, starting a new conversation allows you to give Copilot clearer instructions. To start a new conversation, click the &#34;New Conversation&#34; button at the top of the chat window. When doing so, it&#39;s helpful to save content you want to reference in future chats — like this architecture document — to a file, as we did here.</p>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Let&#39;s Identify What Needs to Be Done" duration="10">
+        <p>At this point, the UI mock and architecture design are finalized. Let&#39;s consider what specific features need to be implemented. We&#39;ll consult Copilot Chat about this as well. Be sure to attach pomodoro.png and architecture.md.</p>
+<pre><code>Please identify all the features that need to be implemented to create this Pomodoro timer application.
+</code></pre>
+<p class="image-container"><img alt="Feature List Review" style="width: 400.00px" src="../../img/8e24c2d7e6a91e1b.png"></p>
+<p class="image-container"><img alt="Feature Identification Example" src="../../img/20a6ec3e5b2f7c50.png"></p>
+<p>Refine this content through your conversation with Copilot. Once finalized, save this content to a file called features.md, just as we did with the architecture.</p>
+<pre><code>Thank you. That looks good, so please write the list of features to implement in a file called features.md.
+</code></pre>
+<p>Now, before we start implementing, a key tip for using Copilot effectively is to avoid trying to implement large features all at once. Instead, start with small features first. This improves the accuracy of the code Copilot suggests, allowing for smoother development.</p>
+<p>Let&#39;s also consult Copilot about how to break down this application development into appropriate increments. Here, attach pomodoro.png, architecture.md, and features.md.</p>
+<pre><code>I want to implement this Pomodoro timer application incrementally. Based on the attached image, architecture, and feature list, please propose a step-by-step implementation plan with appropriate granularity.
+</code></pre>
+<p>When I tried this, Copilot proposed a plan consisting of 6 steps. If there&#39;s anything you&#39;d like to change, go ahead and tell Copilot. Then, save this content to a file called plan.md so you can reference it later. Think about what prompt you should use to give this instruction.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Let&#39;s Implement" duration="30">
+        <p>With all the preparation in place, it&#39;s time to start implementing. Follow the implementation plan proposed in the previous step and implement features incrementally.</p>
+<h2 is-upgraded>1. Preparing the Branch</h2>
+<p>Before starting implementation, let&#39;s create a working branch.</p>
+<h3 is-upgraded>Step 1: Reset Staged Changes</h3>
+<p>Restore all currently staged changes back to the working directory:</p>
+<pre><code language="language-bash" class="language-bash">git restore .
+</code></pre>
+<h3 is-upgraded>Step 2: Create a New Branch</h3>
+<p>Create and switch to the feature/pomodoro branch:</p>
+<pre><code language="language-bash" class="language-bash">git checkout -b feature/pomodoro
+</code></pre>
+<h2 is-upgraded>2. Preparing the Project Structure</h2>
+<p>First, let&#39;s create the directory structure for the project according to our architecture.</p>
+<p>Start by modifying the current project folder structure to support the architecture described in <code>architecture.md</code>. Move files and update configuration files as needed.</p>
+<p>Then, attach <code>pomodoro.png</code>, <code>architecture.md</code>, and <code>plan.md</code>, and give Copilot the following instruction:</p>
+<pre><code>Please implement Step 1 of plan.md. If any existing files in this project need to be moved to different directories, please do that as well. If there are any additional considerations, please ask me.
+</code></pre>
+<p>In my case, Copilot came back with questions that needed consideration, as shown below. In such cases, provide the necessary information.</p>
+<p class="image-container"><img alt="Example Question from Copilot" src="../../img/8254991301cd47cd.png"></p>
+<p>After that, Copilot proceeds with the Step 1 implementation. Once implementation is complete, Copilot will autonomously build the project and check for errors. If errors occur, it will make additional fixes to resolve them. This autonomous behavior is a key characteristic of Agent Mode.</p>
+<p>Once implementation is complete, verify the following:</p>
+<ol type="1">
+<li><strong>Directory structure</strong>: Does it follow the recommended architecture?</li>
+<li><strong>Base files</strong>: Have the necessary base files (app.py, HTML templates, CSS files, etc.) been created?</li>
+<li><strong>Functionality check</strong>: Run a quick test to make sure there are no errors</li>
+</ol>
+<p>Below is an example of my Step 1 implementation result. The state of your application at this stage will likely differ.</p>
+<p class="image-container"><img alt="Step 1 Implementation Result Example" src="../../img/99241f822533e37a.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Let&#39;s Write Tests" duration="20">
+        <p>Before continuing with implementation, let&#39;s write unit tests for the features we&#39;ve implemented so far. Writing unit tests ensures that changes in later steps don&#39;t break existing functionality.</p>
+<p>If unit tests were already implemented in the previous step, you can skip this page.</p>
+<h2 is-upgraded>Implementing Tests</h2>
+<p>Try running the following prompt.</p>
+<pre><code>There are currently no unit tests for the existing implementation. Please implement unit tests.
+</code></pre>
+<p>Copilot&#39;s agent will then ask for permission to execute commands to install unit test dependencies. Like this, the agent always asks the user for confirmation before executing any command. Click &#34;Continue&#34; to allow it to run the necessary commands.</p>
+<p class="image-container"><img alt="Copilot Test Implementation Confirmation" src="../../img/c724e1c653e2c6b3.png"></p>
+<p>Copilot will then execute the command in VS Code&#39;s terminal and install the required dependencies. Similarly, for all subsequent commands, the agent will always ask the user for confirmation before execution. If an error occurs from running a command, the agent will make additional fixes to resolve it.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Configuration for the Next Tasks" duration="20">
+        <p>In the following steps, we will use Copilot features on GitHub.com and the Coding Agent. Let&#39;s configure the necessary settings.</p>
+<h2 is-upgraded>1. GitHub Advanced Security (GHAS) Configuration</h2>
+<p>Enabling the Code Scanning feature of GitHub Advanced Security allows you to automatically detect code vulnerabilities.</p>
+<ol type="1">
+<li>Click the <strong>Settings</strong> tab in your repository</li>
+<li>Select <strong>Security</strong> → <strong>Code security</strong> from the left sidebar</li>
+<li>Click <strong>Set up</strong> in the <strong>Code scanning</strong> section</li>
+</ol>
+<p class="image-container"><img alt="GHAS Code Scanning Setup" src="../../img/96a57e2d2f8719ce.png"></p>
+<ol type="1" start="4">
+<li>Select <strong>Default</strong> (recommended)</li>
+</ol>
+<p class="image-container"><img alt="GHAS Default Configuration" src="../../img/e4bb34522ad67510.png"></p>
+<ol type="1" start="5">
+<li>Click <strong>Enable CodeQL</strong></li>
+</ol>
+<p>This will enable automatic code scanning on push and pull request creation.</p>
+<h2 is-upgraded>2. Enabling Copilot Features</h2>
+<p>Let&#39;s enable the Copilot features available on GitHub.</p>
+<ol type="1">
+<li>Click your profile icon in the upper right of GitHub</li>
+<li>Select <strong>Your Copilot</strong></li>
+</ol>
+<p class="image-container"><img alt="Copilot Settings" src="../../img/e0788a8fe3eff510.png"></p>
+<p>Enable the following features:</p>
+<ul>
+<li><strong>Editor preview features</strong> - Preview features for the editor</li>
+<li><strong>Copilot CLI</strong> - Use Copilot in the terminal</li>
+<li><strong>Copilot code review</strong> - Code review feature</li>
+<li><strong>Copilot coding agent</strong> - Autonomous coding agent</li>
+</ul>
+<aside class="warning"><p><strong>Plan Limitations</strong>: Advanced features such as Copilot Code Review, Coding Agent, and Copilot CLI are only available with GitHub Copilot Business/Enterprise plans. These features are not available on the Free plan.</p>
+</aside>
+<h2 is-upgraded>3. Enable Issues and Actions in Your Repository</h2>
+<p><strong>⚠️ This step is only for users whose Issues or Actions are disabled.</strong> Skip this if they are already enabled.</p>
+<p>Repositories created from templates may have Issues and Actions disabled by default. Since we&#39;ll use them in later steps, enable them if they&#39;re currently disabled.</p>
+<h3 is-upgraded>Enabling Issues</h3>
+<ol type="1">
+<li>Click the <strong>Settings</strong> tab in your repository</li>
+<li>Check the <strong>Features</strong> section under <strong>General</strong></li>
+<li>Check the box for <strong>Issues</strong></li>
+</ol>
+<h3 is-upgraded>Enabling Actions</h3>
+<ol type="1">
+<li>Click the <strong>Actions</strong> tab in your repository</li>
+<li>Click &#34;I understand my workflows, go ahead and enable them&#34; to enable</li>
+</ol>
+<h2 is-upgraded>4. Creating a Personal Access Token (PAT) (Optional)</h2>
+<p>Create a Personal Access Token so that the Coding Agent can operate within GitHub Actions.</p>
+<h3 is-upgraded>Step 1: Create a Fine-grained PAT</h3>
+<p>Visit the following URL to create a new Fine-grained PAT:</p>
+<p><a href="https://github.com/settings/personal-access-tokens/new" target="_blank">https://github.com/settings/personal-access-tokens/new</a></p>
+<p>Configuration:</p>
+<ul>
+<li><strong>Token name</strong>: Enter any name you like (e.g., <code>copilot-workshop</code>)</li>
+<li><strong>Resource owner</strong>: Select your personal user account (not an organization)</li>
+<li><strong>Repository access</strong>: Select <strong>Public repositories</strong> (select Public repositories even if adding to a private repository)</li>
+<li><strong>Permissions</strong>: Enable <strong>Copilot Requests</strong></li>
+</ul>
+<p class="image-container"><img alt="Creating a Fine-grained PAT" src="../../img/14b892fb9208458f.png"></p>
+<p>After creation, make sure to copy the displayed PAT.</p>
+<p><strong>⚠️ Note</strong>: The PAT is only displayed on the screen immediately after creation. It cannot be viewed again after navigating away, so be sure to copy it at this time.</p>
+<h3 is-upgraded>Step 2: Set as a GitHub Actions Repository Secret</h3>
+<p>Set the created PAT as a repository secret:</p>
+<ol type="1">
+<li>Click the <strong>Settings</strong> tab in your repository</li>
+<li>Select <strong>Secrets and variables</strong> → <strong>Actions</strong> from the left sidebar</li>
+<li>Click <strong>New repository secret</strong></li>
+<li>Enter the following: <ul>
+<li><strong>Name</strong>: <code>COPILOT_GITHUB_TOKEN</code></li>
+<li><strong>Value</strong>: Paste the PAT you just created</li>
+</ul>
+</li>
+<li>Click <strong>Add secret</strong></li>
+</ol>
+<h3 is-upgraded>Step 3: Verify Workflow Permissions</h3>
+<p>Verify the Actions workflow permissions so the Coding Agent can automatically create Pull Requests:</p>
+<ol type="1">
+<li>Click the <strong>Settings</strong> tab in your repository</li>
+<li>Select <strong>Actions</strong> → <strong>General</strong> from the left sidebar</li>
+<li>In the <strong>Workflow permissions</strong> section, verify that <strong>Allow GitHub Actions to create and approve pull requests</strong> is checked</li>
+<li>If not checked, enable it and click <strong>Save</strong></li>
+</ol>
+<aside class="special"><p><strong>Tip</strong>: This setting allows the Copilot Coding Agent to use Copilot&#39;s capabilities within GitHub Actions workflows.</p>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Implement the Remaining Features (Optional)" duration="20">
+        <p>This section is <strong>optional</strong>. Proceed if you have already learned the basic Copilot features and want to try more advanced implementations.</p>
+<p>From here, let&#39;s implement the remaining features step by step as a free-form exercise.</p>
+<p>Here are some tips that should be helpful.</p>
+<h2 is-upgraded>When You Want to Give Instructions About the UI</h2>
+<p>If you want to give instructions about specific UI elements, you can upload a screenshot of the UI to Copilot so it can recognize those elements. When doing so, it helps to circle or draw arrows on the screenshot to clearly indicate which elements you&#39;re referring to.</p>
+<p>Alternatively, you can upload two screenshots — one showing the current state and one showing the expected state — to have Copilot identify the differences and make the UI match the expected design as closely as possible.</p>
+<h2 is-upgraded>When You Find Yourself Giving the Same Instructions Repeatedly</h2>
+<p>If you frequently give the same types of instructions when writing prompts or specifying context, you can have Copilot remember those instructions. Specifically, create a file called <code>.github/copilot-instructions.md</code> in your project and write the instructions there. When this file exists, Copilot automatically reads it and references those instructions in subsequent chats.</p>
+<p>Below is a sample of custom instructions.</p>
+<pre><code language="language-markdown" class="language-markdown">This project implements a Pomodoro timer using Flask.
+
+The following are important files in the project. Please reference these files as needed when responding to user instructions.
+ - `pomodoro.png`: The UI mock for the application.
+ - `architecture.md`: The application&#39;s architecture document.
+ - `features.md`: The list of features to implement.
+ - `plan.md`: The step-by-step implementation plan.
+</code></pre>
+<p>You can also include project-specific commands such as build and test commands, and Copilot will automatically use them.</p>
+<h2 is-upgraded>When Implementation Gets Stuck or You Can&#39;t Resolve a Bug</h2>
+<p>In such cases, try the following approaches:</p>
+<ul>
+<li>Instruct Copilot to output debug information, then have it analyze the output.</li>
+<li>Try a different model.</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Commit and Push to Git" duration="10">
+        <p>Let&#39;s commit the code you&#39;ve created to the Git repository and push it to a remote branch. Here are two methods.</p>
+<h2 is-upgraded>Method A: Using Terminal Commands</h2>
+<p>The traditional method of running Git commands directly in the terminal:</p>
+<pre><code>git add .
+git commit -m &#34;Add Pomodoro timer feature&#34;
+git push origin feature/pomodoro
+</code></pre>
+<h2 is-upgraded>Method B: Creating a Commit with Generative AI</h2>
+<p>Use Agent Mode to instruct Copilot directly to commit and push. Run the following prompt:</p>
+<pre><code>I&#39;ve finished creating the feature. Please stage the code changes in git.
+
+Then, please commit with an appropriate commit message and push the changes to the remote branch.
+</code></pre>
+<p class="image-container"><img alt="MCP Git Workflow" src="../../img/26ebf645a750b3a6.png"></p>
+<h3 is-upgraded>[Optional] Auto-creating GitHub Issues via MCP Server</h3>
+<p>Next, you can also use MCP Server to manage your implementation plan as GitHub Issues.</p>
+<aside class="warning"><p><strong>Note</strong>: If the GitHub MCP server is not enabled, start the MCP server from the <code>.vscode/mcp.json</code> file:</p>
+<pre><code language="language-json" class="language-json">{
+  &#34;servers&#34;: {
+    &#34;github-mcp-server&#34;: {
+      &#34;type&#34;: &#34;http&#34;,
+      &#34;url&#34;: &#34;https://api.githubcopilot.com/mcp/&#34;
+    }
+  }
+}
+</code></pre>
+</aside>
+<pre><code>Please create GitHub issues for each step in plan.md.
+</code></pre>
+<p>This instruction causes Copilot to:</p>
+<ol type="1">
+<li>Read the contents of <code>plan.md</code></li>
+<li>Create individual Issues for each step</li>
+<li>Each Issue will include: <ul>
+<li>Step title and detailed description</li>
+<li>Feature requirements to implement</li>
+<li>Acceptance criteria</li>
+<li>Appropriate labels and priority</li>
+</ul>
+</li>
+</ol>
+<p>This enables planned project management and agile development.</p>
+<p class="image-container"><img alt="MCP Issues" src="../../img/b03e6ea597ff6ae3.png"></p>
+<aside class="special"><p><strong>Benefits of MCP</strong>: By using the GitHub MCP server, Copilot can directly access GitHub metadata such as repository information, Issues, Pull Requests, and branch information, enabling more detailed analysis and suggestions.</p>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="[GitHub.com] Copilot Code Review" duration="15">
+        <p>After pushing, let&#39;s create a Pull Request on GitHub.com and leverage Copilot&#39;s code review features.</p>
+<h2 is-upgraded>Creating a Pull Request and Copilot Summary</h2>
+<ol type="1">
+<li>Go to your repository on GitHub</li>
+<li>Click <strong>Open a pull request</strong></li>
+<li>On the Pull Request creation screen, click <strong>Copilot icon</strong> » <strong>Summary</strong></li>
+</ol>
+<p class="image-container"><img alt="Copilot Summary in Pull Request" src="../../img/f379c36d2daae6be.png"></p>
+<p>Copilot will automatically generate a summary of the Pull Request.</p>
+<h2 is-upgraded>Assigning Copilot as a Reviewer</h2>
+<p>In the <strong>Reviewers</strong> section, assign <strong>Copilot</strong> to request a code review from Copilot.</p>
+<aside class="special"><p><strong>Auto-assign Setting</strong>: By going to Settings » Branches » Rulesets » Require a pull request before merging » Automatically request Copilot code review, Copilot will be automatically assigned when a Pull Request is opened.</p>
+</aside>
+<p class="image-container"><img alt="Copilot Auto-assign Settings" src="../../img/bc9c16ab7a83d165.png"></p>
+<h2 is-upgraded>Reviewing Copilot Code Review Results</h2>
+<p>After the Pull Request is opened, you can view the Copilot Code Review results:</p>
+<ul>
+<li><strong>Pull Request Overview</strong>: Summary of code changes</li>
+<li><strong>Issues Found</strong>: Identification of potential problems</li>
+<li><strong>Improvement Suggestions</strong>: Specific suggestions for improving code quality</li>
+</ul>
+<p class="image-container"><img alt="Copilot Code Review Overview" src="../../img/190eae2847f8b194.png"></p>
+<h2 is-upgraded>Static Vulnerability Scanning with GitHub Advanced Security</h2>
+<p>The Pull Request also displays results from GitHub Advanced Security (GHAS) static vulnerability scanning:</p>
+<h3 is-upgraded>Reviewing Security Alerts</h3>
+<p class="image-container"><img alt="GHAS Security Alerts" src="../../img/a5a70f95b612809a.png"></p>
+<ul>
+<li><strong>High-severity Vulnerabilities</strong>: Critical security issues</li>
+<li><strong>Copilot Autofix</strong>: AI-powered automatic fix suggestions</li>
+<li><strong>Detailed Explanations</strong>: Vulnerability details and remediation methods</li>
+</ul>
+<h3 is-upgraded>Check Results Details</h3>
+<p class="image-container"><img alt="GHAS Check Results" src="../../img/b79fd737fef0ad88.png"></p>
+<aside class="special"><p><strong>Leveraging Copilot Autofix</strong>: GitHub provides Copilot Autofix automatic fix suggestions for detected security vulnerabilities. This allows you to quickly resolve security issues.</p>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="[GitHub.com] Copilot Coding Agent" duration="20">
+        <p>Let&#39;s use the GitHub Copilot web interface to automatically generate improvement proposals as Issues and leverage the Coding Agent.</p>
+<h2 is-upgraded>Auto-creating Issues with GitHub Copilot</h2>
+<ol type="1">
+<li>Go to <strong>GitHub.com</strong> and click the <strong>Copilot</strong> icon in the upper right</li>
+<li>Verify that your repository is added to the Chat context</li>
+<li>Enter the following prompt:</li>
+</ol>
+<pre><code>Please create 3 issues for customizing the Pomodoro timer.
+
+Pattern A: Enhanced Visual Feedback
+
+Circular progress bar animation: Smooth decreasing animation based on remaining time
+Color changes: Gradient transition from blue → yellow → red as time progresses
+Background effects: Particle effects or ripple animations in the background during focus time
+Test purpose: Measure the impact of visual immersion on user concentration
+
+Pattern B: Improved Customizability
+
+Flexible time settings: Choose from 15/25/35/45 minutes instead of a fixed 25 minutes
+Theme switching: Dark/Light/Focus mode (minimal)
+Sound settings: Toggle start/end/tick sounds on/off
+Custom break duration: Choose from 5/10/15 minutes
+Test purpose: Measure the impact of personalized settings on user retention
+
+Pattern C: Gamification Elements
+
+Experience point system: XP and level-ups based on completed Pomodoros
+Achievement badges: Accomplishment system for &#34;3 consecutive days&#34;, &#34;10 completions this week&#34;, etc.
+Weekly/monthly statistics: More detailed graph displays (completion rate, average focus time, etc.)
+Streak display: Consecutive day count display
+Test purpose: Measure the impact of gamification elements on motivation and continued usage
+</code></pre>
+<p class="image-container"><img alt="Creating Issues with GitHub Copilot" src="../../img/a69389a1032d0aab.png"></p>
+<h2 is-upgraded>Creating Issues and Assigning the Coding Agent</h2>
+<ol type="1">
+<li><strong>Copilot will automatically generate 3 Issues</strong></li>
+<li>Review the content of each Issue and edit as needed</li>
+<li>Click the <strong>Create</strong> button to create each Issue</li>
+<li>After navigating to the Issue page, select <strong>Copilot</strong> in the <strong>Assignees</strong> section to assign the Coding Agent</li>
+</ol>
+<p class="image-container"><img alt="Assigning Coding Agent to Issue" src="../../img/14fa8fd6031e20b8.png"></p>
+<h2 is-upgraded>Expected Pull Request Results</h2>
+<p>Once the Coding Agent is assigned, you can expect the following results:</p>
+<ul>
+<li><strong>Automatic code implementation</strong>: Feature implementation based on each Issue&#39;s requirements</li>
+<li><strong>Pull Request creation</strong>: Automatic PR creation after implementation is complete</li>
+<li><strong>Comprehensive tests</strong>: Including both unit tests and UI tests</li>
+</ul>
+<h3 is-upgraded>Pattern A: Enhanced Visual Feedback</h3>
+<p class="image-container"><img alt="Visual Feedback Enhancement PR Result" src="../../img/705e39500bad3885.png"></p>
+<h3 is-upgraded>Pattern B: Improved Customizability</h3>
+<p class="image-container"><img alt="Customizability Improvement PR Result" src="../../img/8184bbbafbf918ee.png"></p>
+<h3 is-upgraded>Pattern C: Gamification Elements</h3>
+<p class="image-container"><img alt="Gamification Elements PR Result" src="../../img/3e0271a144640fba.png"></p>
+<aside class="special"><p><strong>Leveraging MCP Server</strong>: The GitHub MCP Server and Playwright MCP Server are included in the Coding Agent&#39;s initial setup. This enables not only unit tests but also automated UI verification through screenshots. The Coding Agent visually verifies that implemented features work as expected, delivering higher quality code.</p>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="[GitHub.com] Agentic Workflow" duration="15">
+        <p>By combining GitHub Actions with Copilot, let&#39;s experience an <strong>Agentic Workflow</strong> that detects code changes and automatically updates documentation.</p>
+<h2 is-upgraded>What is an Agentic Workflow?</h2>
+<p>An Agentic Workflow is a mechanism that leverages Copilot (AI) within GitHub Actions workflows to autonomously execute tasks in response to code changes. In this workshop, a workflow has been pre-configured to automatically update related documentation when changes are made to the Pomodoro timer code.</p>
+<h2 is-upgraded>1. Merge the Pull Request into the Main Branch</h2>
+<p>Merge the Pull Request created in the previous step into the main branch.</p>
+<ol type="1">
+<li>Go to your repository on GitHub</li>
+<li>Click the <strong>Pull requests</strong> tab</li>
+<li>Open the target Pull Request</li>
+<li>Click the <strong>Merge pull request</strong> button to merge</li>
+</ol>
+<p class="image-container"><img alt="Merging the Pull Request" src="../../img/18921e0b11f54ac5.png"></p>
+<h2 is-upgraded>2. Verify the Workflow Execution</h2>
+<p>The Agentic Workflow was automatically triggered when you pushed the code.</p>
+<ol type="1">
+<li>Go to your repository on GitHub</li>
+<li>Click the <strong>Actions</strong> tab</li>
+<li>Verify that the <strong>Pomodoro Documentation Sync</strong> workflow is running</li>
+</ol>
+<p class="image-container"><img alt="Agentic Workflow Execution" src="../../img/ef16e89e1e5c684b.png"></p>
+<p>This workflow automatically updates the documentation managed under <code>pomodoro/docs/</code> based on the changes whenever there are diffs in the code under <code>pomodoro/</code>.</p>
+<h2 is-upgraded>3. Review the Pull Request</h2>
+<p>Once the Actions run completes, a <strong>Pull Request</strong> to update the documentation is automatically created.</p>
+<ol type="1">
+<li>Click the <strong>Pull requests</strong> tab</li>
+<li>Review the PR created by Copilot</li>
+<li>Review the documentation changes</li>
+</ol>
+<h2 is-upgraded>4. Create Your Own Agentic Workflow</h2>
+<p>Now that you&#39;ve seen the Agentic Workflow in action, let&#39;s create your own.</p>
+<p>Run the following prompt in Agent Mode:</p>
+<pre><code>Please create a GitHub Agentic Workflow by referencing the following URL.
+https://github.com/github/gh-aw/blob/main/create.md
+
+The purpose of the workflow is as follows:
+- It runs when code under copilotWebRelay is updated
+- It updates the documentation under copilotWebRelay/docs based on the code under copilotWebRelay, ensuring that source code and documentation are always in sync
+</code></pre>
+<aside class="special"><p><strong>Possibilities of Agentic Workflows</strong>: Beyond documentation updates, you can build Agentic Workflows for various tasks such as automatic test generation, automated code reviews, and release note creation.</p>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Let&#39;s Build the Copilot Web Relay" duration="10">
+        <p>From here, as an advanced section, we will build the <strong>Copilot Web Relay</strong> — a web application that allows you to access GitHub Copilot CLI from a browser.</p>
+<p>In this section, we take a different approach from the Pomodoro timer. We will experience a workflow of <strong>loading pre-prepared design documents into Copilot and implementing step by step through an interactive dialogue based on those documents</strong>.</p>
+<p class="image-container"><img alt="Copilot Web Relay" src="../../img/d7ef98dee5aeae1e.png"></p>
+<h2 is-upgraded>What is Copilot Web Relay?</h2>
+<p>It is a web application that allows you to interact with your locally running GitHub Copilot CLI in real time through a browser UI, without directly operating the terminal.</p>
+<h2 is-upgraded>Architecture Overview</h2>
+<table>
+<tr><td colspan="1" rowspan="1"><p>Component</p>
+</td><td colspan="1" rowspan="1"><p>Tech Stack</p>
+</td><td colspan="1" rowspan="1"><p>Role</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><strong>Browser</strong></p>
+</td><td colspan="1" rowspan="1"><p>React + TypeScript + Vite</p>
+</td><td colspan="1" rowspan="1"><p>Terminal display (xterm.js), session management</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><strong>Backend Server</strong></p>
+</td><td colspan="1" rowspan="1"><p>Python (FastAPI) + WebSocket</p>
+</td><td colspan="1" rowspan="1"><p>Copilot CLI process management, WebSocket bridge</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><strong>CLI Bridge</strong></p>
+</td><td colspan="1" rowspan="1"><p>Python (asyncio + pexpect)</p>
+</td><td colspan="1" rowspan="1"><p>Copilot CLI PTY (pseudo-terminal) control, I/O streaming</p>
+</td></tr>
+</table>
+<p>Browser ↔ WebSocket (bidirectional communication) ↔ Backend Server ↔ PTY/stdin/stdout (subprocess management) ↔ Copilot CLI</p>
+<h2 is-upgraded>Development Approach</h2>
+<p>In this section, we&#39;ll proceed as follows:</p>
+<ol type="1">
+<li><strong>Review the design document</strong> — Review the design document distributed with the project and understand the overall picture of the application</li>
+<li><strong>GitHub Copilot CLI</strong> — Launch the CLI in the terminal and verify it works correctly</li>
+<li><strong>AI-driven development</strong> — Leverage the design document and implement the web application through Vibe Coding while interacting with GitHub Copilot CLI</li>
+</ol>
+<aside class="special"><p><strong>Key Point of This Section</strong>: The goal is to experience the quality and volume of tasks that can be achieved when combining Copilot&#39;s high-end models with GitHub Copilot&#39;s latest features. By preparing design documents in advance, you can clearly communicate the context of &#34;what to build&#34; to Copilot. In actual development workflows, leveraging design documents as Copilot context is a highly effective practice.</p>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Reviewing the Design Document and GitHub Copilot CLI" duration="15">
+        <h2 is-upgraded>1. Reviewing the Design Document</h2>
+<p>The design document for the Copilot Web Relay is distributed at <code>copilotWebRelay/planning.md</code> within the project. Start by opening this file to understand the overall picture of the application.</p>
+<p>The design document includes the following:</p>
+<ul>
+<li><strong>Architecture</strong>: Browser ↔ WebSocket ↔ FastAPI ↔ PTY ↔ Copilot CLI structure</li>
+<li><strong>Component Structure</strong>: Frontend (React/TS), Backend (FastAPI), CLI Bridge (pexpect)</li>
+<li><strong>Feature Requirements</strong>: Phase 1 (MVP) and Phase 2 (Enhanced Chat UI)</li>
+<li><strong>WebSocket Protocol Design</strong>: Message format and state management specifications</li>
+<li><strong>Directory Structure</strong>: File layout and the role of each file</li>
+<li><strong>Implementation Task List</strong>: Dependencies between tasks</li>
+<li><strong>Important Implementation Notes</strong>: Proactive measures for common pitfalls</li>
+</ul>
+<aside class="special"><p><strong>Tips for Using the Design Document</strong>: In the upcoming implementation phase, when sending prompts to GitHub Copilot CLI, adding the instruction <code>refer to planning.md</code> allows Copilot to generate code with full understanding of the design document context.</p>
+</aside>
+<h2 is-upgraded>2. Launching GitHub Copilot CLI</h2>
+<p>Open the terminal in VS Code and enter the following command to launch GitHub Copilot CLI:</p>
+<pre><code language="language-bash" class="language-bash">copilot
+</code></pre>
+<p>When it starts successfully, an interactive interface will appear. Type <code>/help</code> to see the available commands.</p>
+<aside class="warning"><p><strong>About GitHub Copilot CLI Setup</strong> Normally, using GitHub Copilot CLI requires installing <strong>GitHub CLI (</strong><strong><code>gh</code></strong><strong>)</strong> and setting up the Copilot extension. In this workshop, <strong>the DevContainer configuration includes GitHub Copilot CLI installation and authentication</strong>, so the <code>copilot</code> command is available immediately when you launch Codespaces.</p>
+<p>To set up in your own environment, the following steps are required:</p>
+<ol type="1">
+<li>Install GitHub CLI: <code>brew install gh</code> (macOS)</li>
+<li>Authenticate with GitHub CLI: <code>gh auth login</code></li>
+<li>Install the Copilot extension: <code>gh extension install github/copilot-cli</code></li>
+</ol>
+</aside>
+<h2 is-upgraded>3. GitHub Copilot CLI Command Reference</h2>
+<p>In GitHub Copilot CLI, you can type natural language instructions as text or use slash commands starting with <code>/</code>.</p>
+<h3 is-upgraded>Code-related</h3>
+<table>
+<tr><td colspan="1" rowspan="1"><p>Command</p>
+</td><td colspan="1" rowspan="1"><p>Description</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><code>/ide</code></p>
+</td><td colspan="1" rowspan="1"><p>Connect to the IDE workspace</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><code>/diff</code></p>
+</td><td colspan="1" rowspan="1"><p>View change diffs in the current directory</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><code>/review</code></p>
+</td><td colspan="1" rowspan="1"><p>Run the code review agent to analyze changes</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><code>/lsp</code></p>
+</td><td colspan="1" rowspan="1"><p>Manage language server settings</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><code>/terminal-setup</code></p>
+</td><td colspan="1" rowspan="1"><p>Terminal setup for multiline input (Shift+Enter / Ctrl+Enter)</p>
+</td></tr>
+</table>
+<h3 is-upgraded>Permissions</h3>
+<table>
+<tr><td colspan="1" rowspan="1"><p>Command</p>
+</td><td colspan="1" rowspan="1"><p>Description</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><code>/allow-all</code></p>
+</td><td colspan="1" rowspan="1"><p>Enable all permissions (tools, paths, URLs)</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><code>/add-dir</code></p>
+</td><td colspan="1" rowspan="1"><p>Add a permitted directory for file access</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><code>/list-dirs</code></p>
+</td><td colspan="1" rowspan="1"><p>List permitted directories</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><code>/cwd</code></p>
+</td><td colspan="1" rowspan="1"><p>Change or display the working directory</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><code>/reset-allowed-tools</code></p>
+</td><td colspan="1" rowspan="1"><p>Reset the list of allowed tools</p>
+</td></tr>
+</table>
+<h3 is-upgraded>Session Management</h3>
+<table>
+<tr><td colspan="1" rowspan="1"><p>Command</p>
+</td><td colspan="1" rowspan="1"><p>Description</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><code>/resume</code></p>
+</td><td colspan="1" rowspan="1"><p>Switch to another session (specify session ID)</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><code>/rename</code></p>
+</td><td colspan="1" rowspan="1"><p>Rename the current session</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><code>/context</code></p>
+</td><td colspan="1" rowspan="1"><p>Display token usage of the context window</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><code>/usage</code></p>
+</td><td colspan="1" rowspan="1"><p>Display session usage metrics and statistics</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><code>/session</code></p>
+</td><td colspan="1" rowspan="1"><p>Display session information and workspace summary</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><code>/compact</code></p>
+</td><td colspan="1" rowspan="1"><p>Summarize conversation history to reduce context window usage</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><code>/share</code></p>
+</td><td colspan="1" rowspan="1"><p>Export session as a Markdown file or GitHub Gist</p>
+</td></tr>
+</table>
+<h3 is-upgraded>Help &amp; Feedback</h3>
+<table>
+<tr><td colspan="1" rowspan="1"><p>Command</p>
+</td><td colspan="1" rowspan="1"><p>Description</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><code>/help</code></p>
+</td><td colspan="1" rowspan="1"><p>Display help for interactive commands</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><code>/changelog</code></p>
+</td><td colspan="1" rowspan="1"><p>Display CLI version changelog</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><code>/feedback</code></p>
+</td><td colspan="1" rowspan="1"><p>Send feedback about the CLI</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><code>/theme</code></p>
+</td><td colspan="1" rowspan="1"><p>Check or set the terminal theme</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><code>/experimental</code></p>
+</td><td colspan="1" rowspan="1"><p>Display available experimental features, toggle experimental mode</p>
+</td></tr>
+</table>
+<h3 is-upgraded>Others</h3>
+<table>
+<tr><td colspan="1" rowspan="1"><p>Command</p>
+</td><td colspan="1" rowspan="1"><p>Description</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><code>/model</code></p>
+</td><td colspan="1" rowspan="1"><p>Select the AI model to use (GPT, Claude, Gemini, etc.)</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><code>/clear</code> , <code>/new</code></p>
+</td><td colspan="1" rowspan="1"><p>Clear conversation history</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><code>/plan</code></p>
+</td><td colspan="1" rowspan="1"><p>Create an implementation plan before coding</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><code>/instructions</code></p>
+</td><td colspan="1" rowspan="1"><p>Display or toggle custom instruction files</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><code>/diagnose</code></p>
+</td><td colspan="1" rowspan="1"><p>Analyze current session logs</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><code>/login</code> , <code>/logout</code></p>
+</td><td colspan="1" rowspan="1"><p>Log in/out of Copilot</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><code>/user</code></p>
+</td><td colspan="1" rowspan="1"><p>Manage GitHub users</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><code>/exit</code> , <code>/quit</code></p>
+</td><td colspan="1" rowspan="1"><p>Exit the CLI</p>
+</td></tr>
+</table>
+<h3 is-upgraded>Custom Instruction Files</h3>
+<p>Copilot CLI automatically loads custom instruction files from the following locations:</p>
+<ul>
+<li><code>CLAUDE.md</code> / <code>GEMINI.md</code> / <code>AGENTS.md</code> (git root and current directory)</li>
+<li><code>.github/instructions/**/*.instructions.md</code> (git root and current directory)</li>
+<li><code>.github/copilot-instructions.md</code></li>
+<li><code>$HOME/.copilot/copilot-instructions.md</code></li>
+</ul>
+<aside class="special"><p><strong>CLI Tip</strong>: You can switch models using the <code>/model</code> command. If implementation isn&#39;t progressing well, trying a different model may yield better results. The <code>/plan</code> command lets you automatically generate an implementation plan before coding, which is particularly effective when combined with a design document.</p>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Implement with Vibe Coding" duration="60">
+        <p>Now that you&#39;ve reviewed the design document and verified GitHub Copilot CLI is working, it&#39;s time to implement the Copilot Web Relay with <strong>Vibe Coding</strong>.</p>
+<p>Simply execute the following 4 steps in order, and Copilot will build the application based on the design document.</p>
+<h2 is-upgraded>Step 1: Launch Copilot CLI</h2>
+<p>Launch Copilot CLI in the VS Code terminal.</p>
+<pre><code language="language-bash" class="language-bash">copilot
+</code></pre>
+<h2 is-upgraded>Step 2: Allow All Permissions</h2>
+<pre><code>/allow-all
+</code></pre>
+<p><code>/allow-all</code> is a command that grants <strong>all permissions at once for tool execution, file access, and external URL access</strong> to Copilot CLI.</p>
+<p>Normally, Copilot CLI prompts the user for permission each time it performs file read/write operations, command execution, or external communication for security purposes. Running <code>/allow-all</code> skips these confirmation prompts, allowing Copilot to autonomously create/edit files, install packages, start servers, and more.</p>
+<aside class="warning"><p><strong>Note</strong>: <code>/allow-all</code> is only effective for the current session. For security reasons, only use it with trusted projects. If you prefer to grant permissions individually, you can use <code>/add-dir</code> to set directory-level access permissions.</p>
+</aside>
+<h2 is-upgraded>Step 3: Select a High-end Model</h2>
+<pre><code>/model Claude Opus 4.6
+</code></pre>
+<p>Select the most powerful model available. Copilot CLI lets you switch AI models with the <code>/model</code> command, allowing you to choose the optimal model based on task complexity. For building a web application with multiple components like this one, a high-end model with strong reasoning capabilities is most effective.</p>
+<h2 is-upgraded>Step 4: Implement Everything at Once with Fleet Mode</h2>
+<pre><code>/fleet Build Copilot Web Relay — a web application that allows accessing GitHub Copilot CLI from a browser. Please follow the plan in copilotWebRelay/planning.md for implementation. If anything is unclear, please ask me first.
+</code></pre>
+<p><code>/fleet</code> is a command that <strong>launches multiple sub-agents in parallel to divide and concurrently execute large tasks</strong>.</p>
+<p>In normal Copilot CLI, tasks are processed one at a time sequentially, but with <code>/fleet</code>, Copilot automatically breaks down tasks and <strong>progresses multiple work items simultaneously</strong> — such as backend implementation, frontend implementation, and configuration file creation. This allows you to complete in a single instruction what previously required giving instructions one by one.</p>
+<p>In Fleet Mode, the following happens automatically:</p>
+<ul>
+<li><strong>Task decomposition</strong>: Reads the design document and identifies components to implement</li>
+<li><strong>Parallel implementation</strong>: Simultaneously implements Backend (FastAPI + CLI Bridge + WebSocket) and Frontend (React + xterm.js)</li>
+<li><strong>Dependency resolution</strong>: Package installation, configuration file generation</li>
+<li><strong>Integration testing</strong>: Verification after implementation</li>
+</ul>
+<aside class="special"><p><strong>Fleet Mode Tips</strong>: If Copilot asks questions, respond appropriately. For content described in the design document, responding with &#34;please refer to planning.md&#34; is also effective. Implementation progress is displayed in real time in the terminal.</p>
+</aside>
+<h2 is-upgraded>Hints If You Get Stuck</h2>
+<p>If errors occur during Fleet Mode implementation, try the following:</p>
+<ul>
+<li><strong>Share the error message directly with Copilot</strong>: Simply saying &#34;please fix this error&#34; is often enough</li>
+<li><strong>Check changes with </strong><strong><code>/diff</code></strong>: Verify there are no unintended changes</li>
+<li><strong>Switch models with </strong><strong><code>/model</code></strong>: Try a different model and retry</li>
+<li><strong>Review the design document notes</strong>: The &#34;Important Implementation Notes&#34; section in <code>planning.md</code> contains solutions for common bugs</li>
+</ul>
+<aside class="warning"><p><strong>Common Pitfalls</strong>:</p>
+<ul>
+<li><strong>Vite WebSocket proxy</strong>: You need to specify <code>http://</code> instead of <code>ws://</code> for the <code>target</code></li>
+<li><strong>React StrictMode</strong>: <code>useEffect</code> running twice can cause unstable WebSocket connections</li>
+<li><strong>FastAPI routing order</strong>: StaticFiles mount must be defined after WebSocket endpoints</li>
+<li><strong>xterm.js v5 package name</strong>: Use <code>@xterm/addon-fit</code> instead of <code>xterm-addon-fit</code></li>
+</ul>
+</aside>
+<p>Below is my implementation result from a single-shot prompt.</p>
+<p class="image-container"><img alt="Copilot Web Relay Implementation Result" src="../../img/90abb3d34df273d5.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Understand &amp; Improve the Code" duration="20">
+        <p>Let&#39;s have Copilot explain the code from the Vibe Coding implementation of Copilot Web Relay to deepen our understanding. Then we&#39;ll find issues and implement improvements.</p>
+<h2 is-upgraded>1. Request an Explanation of the Entire Codebase</h2>
+<p>First, let&#39;s get an overview of the implemented code. Enter the following prompt in Agent Mode:</p>
+<pre><code>Please review the entire codebase of this Copilot Web Relay application and explain the architecture, the role of each file, and the main processing flows.
+</code></pre>
+<p>The Copilot agent will automatically scan files in the project and explain the code structure and processing flows.</p>
+<aside class="special"><p><strong>Tip</strong>: In Agent Mode, Copilot automatically references files within the project when answering, so you don&#39;t need to manually add files to the context.</p>
+</aside>
+<h2 is-upgraded>2. Identify Issues</h2>
+<p>Next, let&#39;s have Copilot identify issues from a code quality and security perspective:</p>
+<pre><code>Looking at this Copilot Web Relay application as a whole, what issues or areas for improvement do you see? Please analyze from the perspectives of design patterns, code quality, maintainability, and security.
+</code></pre>
+<p>You can also drill down into specific components:</p>
+<pre><code>Are there any issues with the error handling and resource management in backend/cli_bridge.py? Please suggest improvements.
+</code></pre>
+<pre><code>Are there any issues with the WebSocket connection management in frontend/src/App.tsx? Please check whether it follows React best practices.
+</code></pre>
+<h2 is-upgraded>3. Implement the Improvements</h2>
+<p>Let&#39;s have Copilot actually fix the issues found:</p>
+<pre><code>Please implement all of the improvements you suggested.
+</code></pre>
+<p>Copilot will propose changes directly to the code. Review the changes and use the &#34;Keep&#34; or &#34;Undo&#34; buttons in the chat to decide whether to accept them.</p>
+<h2 is-upgraded>4. Verify Functionality</h2>
+<p>After implementing improvements, verify that the application continues to work correctly:</p>
+<pre><code>Please verify that the application works correctly after implementing the improvements. Start the backend, build the frontend, and verify operation in the browser.
+</code></pre>
+<aside class="special"><p><strong>Important</strong>: In Agent Mode, Copilot operates more autonomously, so be sure to carefully review the proposed changes before accepting them. The agent may also automatically detect and attempt to fix errors that occur after code changes.</p>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Congratulations 🎉" duration="5">
+        <h2 is-upgraded>What You Learned Today</h2>
+<p>In this workshop, you learned the following:</p>
+<ol type="1">
+<li><strong>Basic usage of GitHub Copilot</strong></li>
+<li><strong>Code explanation and improvement with Agent Mode</strong></li>
+<li><strong>Spec-driven development — controlling AI while implementing</strong></li>
+<li><strong>AI-driven development using powerful models and tools</strong></li>
+</ol>
+<h2 is-upgraded>Next Steps</h2>
+<ul>
+<li>Try using Copilot in your actual projects</li>
+<li>Take on more complex application development</li>
+<li>Keep up with Copilot&#39;s new features</li>
+<li>Deploy the Copilot Web Relay to your own environment</li>
+</ul>
+<h2 is-upgraded>Resources</h2>
+<ul>
+<li><a href="https://docs.github.com/copilot" target="_blank">GitHub Copilot Documentation</a></li>
+<li><a href="https://docs.github.com/copilot/using-github-copilot/best-practices-for-using-github-copilot" target="_blank">GitHub Copilot Best Practices</a></li>
+</ul>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/claat-public/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/prettify.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
+</body>
+</html>

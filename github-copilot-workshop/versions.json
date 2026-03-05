@@ -1,0 +1,26 @@
+{
+  "defaultVersion": "v1.0.2",
+  "versions": [
+    {
+      "id": "v1.0.2",
+      "version": "v1.0.2",
+      "name": "v1.0.2 (Latest)",
+      "path": "versions/v1.0.2/index.html",
+      "description": "Added Copilot Web Relay section"
+    },
+    {
+      "id": "v1.0.1",
+      "version": "v1.0.1",
+      "name": "v1.0.1",
+      "path": "versions/v1.0.1/index.html",
+      "description": "December 2025 edition"
+    },
+    {
+      "id": "v1.0.0",
+      "version": "v1.0.0",
+      "name": "v1.0.0",
+      "path": "versions/v1.0.0/index.html",
+      "description": "Initial release"
+    }
+  ]
+}

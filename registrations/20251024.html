@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>GitHub Copilot Hands-On Workshop (2025/10/24)</title>
+  <style>
+    :root{--blue-500:#0078d4;--bg:#f6f7fb;--card:#fff}
+    *{box-sizing:border-box}
+    body{font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;margin:0;background:var(--bg);color:#111}
+    .hero{background:linear-gradient(90deg,var(--blue-500) 0%,#0a73c8 40%,#7b4ef6 100%);color:#fff;padding:48px 24px;border-bottom:1px solid rgba(0,0,0,0.06)}
+    .hero .inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;gap:24px}
+    .hero h1{margin:0;font-size:2rem;line-height:1.1}
+    .hero .meta{margin-top:12px;font-size:0.95rem;opacity:0.95}
+    .container{max-width:1100px;margin:28px auto;padding:0 24px}
+
+    .notice{background:#fff8e1;border:1px solid #ffe0a3;padding:16px;border-radius:8px;display:flex;align-items:center;gap:12px;margin-bottom:24px}
+    .notice .dot{width:12px;height:12px;border-radius:50%;background:#d9534f;display:inline-block}
+    .layout{display:grid;grid-template-columns:1fr;gap:24px}
+
+    /* Left column (timeline) */
+    .left{background:var(--card);padding:20px;border-radius:8px;box-shadow:0 4px 12px rgba(12,23,40,0.06)}
+    .time{font-weight:600;color:#333;margin-bottom:8px}
+    .event-title{font-size:1.05rem;font-weight:700;margin:6px 0}
+    .muted{color:#666;font-size:0.95rem}
+
+    /* Right column */
+    .right section{background:var(--card);padding:20px;border-radius:8px;box-shadow:0 4px 12px rgba(12,23,40,0.04);margin-bottom:16px}
+    dl{display:grid;grid-template-columns:110px 1fr;gap:6px 16px}
+    dt{font-weight:700;color:#222}
+    dd{margin:0;color:#444}
+
+    .agenda-list{list-style:none;padding:0;margin:0}
+    .agenda-list li{padding:10px 0;border-bottom:1px solid #f0f2f5}
+
+    .venue small{display:block;color:#666}
+
+    .speakers{display:flex;gap:18px;align-items:center}
+    .speaker-card{display:flex;gap:14px;align-items:center}
+    .speaker-card img{width:88px;height:88px;border-radius:50%;object-fit:cover}
+    .speaker-info{font-size:0.95rem}
+    .speaker-info .name{font-weight:700;margin-bottom:4px}
+    .footer-note{font-size:0.9rem;color:#666;margin-top:6px}
+
+    @media (max-width:800px){.layout{grid-template-columns:1fr}.hero .inner{flex-direction:column;align-items:flex-start}}
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="inner">
+      <div>
+        <span style="display:inline-block;background:#ffffff1a;padding:6px 8px;border-radius:6px;font-weight:700;font-size:0.85rem">In-Person</span>
+        <span style="display:inline-block;background:#ffffff1a;padding:6px 8px;border-radius:6px;font-weight:700;font-size:0.85rem;margin-left:8px">Remote</span>
+        <h1>GitHub Copilot Hands-On Workshop — Practical Usage in Development</h1>
+        <div class="meta">Date &amp; Time: Friday, October 24, 2025, 2:00 PM – 4:00 PM (GMT+09:00)　/　Venue: Microsoft Japan Corp., Shinagawa Head Office 31F Seminar Room + Online</div>
+      </div>
+      <div style="margin-left:auto;opacity:0.95">
+        <!-- Decorative area on the right (replaced by background gradient) -->
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="layout">
+      <section class="right">
+
+        <section>
+          <h3>Event Overview</h3>
+          <dl>
+            <dt>Date &amp; Time</dt>
+            <dd>Friday, October 24, 2025　14:00 – 16:00 (Registration opens at 13:30)</dd>
+            <dt>Venue</dt>
+            <dd>In-Person: Microsoft Japan Corp., Shinagawa Head Office 31F Seminar Room<br>Remote: Zoom (a link will be shared with registered participants)<br><small>Shinagawa Grand Central Tower, 2-16-3 Konan, Minato-ku, Tokyo</small></dd>
+            <dt>Capacity</dt>
+            <dd>In-Person: 60 attendees, Remote: 100 attendees (first-come, first-served)</dd>
+          </dl>
+        </section>
+
+        <div style="text-align:center;margin:32px 0">
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSfRArY65FOCeYNx5w0-zrVf11YaTseDgek56yzC6SVsLQABfg/viewform" 
+             target="_blank" 
+             style="display:inline-block;background:linear-gradient(45deg,var(--blue-500),#7b4ef6);color:#fff;padding:16px 40px;border-radius:8px;text-decoration:none;font-weight:700;font-size:1.1rem;box-shadow:0 4px 16px rgba(0,120,212,0.3);transition:transform 0.2s,box-shadow 0.2s"
+             onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 6px 20px rgba(0,120,212,0.4)'"
+             onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 4px 16px rgba(0,120,212,0.3)'">
+            📝 Register Here
+          </a>
+        </div>
+
+        <section>
+          <h3>Workshop Objectives</h3>
+          <p>
+            GitHub Copilot is a tool that leverages AI-powered code completion and automation to boost development speed and maximize productivity. However, many organizations face challenges such as wanting to understand specifically how GitHub Copilot can help, wanting to evaluate the actual user experience before proceeding with a proof of concept (PoC), or not knowing how to roll out Copilot across their team or organization. This workshop provides a hands-on learning experience with GitHub Copilot, giving participants a concrete understanding of how it can be applied in real-world development workflows.
+          </p>
+        </section>
+
+        <section>
+          <h3>Content</h3>
+          <div style="margin-bottom:16px">
+            <h4 style="margin:0 0 8px;font-size:1rem;color:#333">GitHub Copilot Fundamentals and Use Cases</h4>
+            <p style="margin:0;font-size:0.95rem;color:#555">An overview of how GitHub Copilot works and how AI assists with code generation. We will present practical use cases aligned with real-world business scenarios.</p>
+          </div>
+          <div style="margin-bottom:16px">
+            <h4 style="margin:0 0 8px;font-size:1rem;color:#333">Hands-On Lab — Try GitHub Copilot Yourself</h4>
+            <p style="margin:0;font-size:0.95rem;color:#555">Participants will use GitHub Copilot in their own environment, exploring features such as code completion, agent mode, code review, test generation, and documentation generation. Gain practical insights into questions like "How much can you rely on AI?" and "In what scenarios is it most effective?"</p>
+          </div>
+          <div>
+            <h4 style="margin:0 0 8px;font-size:1rem;color:#333">Best Practices for Enterprise Adoption</h4>
+            <p style="margin:0;font-size:0.95rem;color:#555">Key considerations for deploying GitHub Copilot in an enterprise setting, including how to run a PoC and best practices for adoption within development teams.</p>
+          </div>
+        </section>
+
+        <section>
+          <h3>Agenda</h3>
+          <div class="time">14:00 - 16:00</div>
+          <div class="event-title">GitHub Copilot Hands-On Workshop — Practical Usage in Development</div>
+          <p class="muted">A detailed timetable will be provided in the materials distributed on the day of the event.</p>
+        </section>
+
+        <section>
+          <h3>Target Audience</h3>
+          <p>
+            This workshop is intended for developers, technical leads, and technology decision-makers (CTOs, engineering managers, etc.) who are considering adopting GitHub Copilot. It is ideal for anyone looking to improve development productivity with GitHub Copilot.
+          </p>
+        </section>
+
+        <section>
+          <h3>Requirements for Participation</h3>
+          <ol style="margin:0;padding-left:1.2rem">
+            <li style="margin-bottom:8px">Please bring a PC that can access GitHub (you will need to bring your own laptop).</li>
+            <li style="margin-bottom:8px">A GitHub account is required (a free account is sufficient).<br>
+              <span style="margin-left:12px;font-size:0.9rem;color:#666">* We will be using GitHub Copilot Free. If you already use GitHub Copilot for work, you may use your existing setup.</span><br>
+              <span style="margin-left:12px;font-size:0.9rem;color:#666">* You can create a free GitHub account here: <a href="https://github.co.jp/" target="_blank">https://github.co.jp/</a></span>
+            </li>
+            <li>Your local development environment should be set up in advance.<br>
+              <span style="margin-left:12px;font-size:0.9rem;color:#666">Option 1: Access to GitHub Codespaces</span><br>
+              <span style="margin-left:12px;font-size:0.9rem;color:#666">Option 2: Visual Studio Code installed</span>
+            </li>
+          </ol>
+        </section>
+
+        <section>
+          <h3>What to Bring</h3>
+          <ul style="margin:0;padding-left:1.1rem">
+            <li><strong>In-person attendees:</strong> Laptop, portable Wi-Fi hotspot (Wi-Fi will be available at the venue; bring your own only if needed)</li>
+            <li><strong>Remote attendees:</strong> Laptop, stable internet connection, camera &amp; microphone (recommended)</li>
+          </ul>
+          <p style="font-size:0.9rem;color:#666;margin-top:12px">
+            * We will be using Microsoft's Wi-Fi on the day. If your company policy restricts connecting to external networks, please bring your own Wi-Fi hotspot that can connect to your PC.
+          </p>
+        </section>
+
+        <section>
+          <h3>Speaker</h3>
+          <div class="speakers">
+            <div class="speaker-card">
+              <img src="speaker.jpg" alt="Speaker photo">
+              <div class="speaker-info">
+                <div class="name">William Zhang</div>
+                <div class="muted">GitHub Japan G.K. / Solutions Engineer</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <div class="footer-note">The detailed agenda and handout materials will be shared separately with registered participants.</div>
+      </section>
+    </div>
+  </main>
+</body>
+</html>
