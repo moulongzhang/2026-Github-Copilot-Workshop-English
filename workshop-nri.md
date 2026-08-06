@@ -270,11 +270,11 @@ copilot
 
 `/allow-all` is a command that grants **all permissions at once for tool execution, file access, and external URL access** to Copilot CLI.
 
-Normally, Copilot CLI prompts the user for permission each time it performs file read/write operations, command execution, or external communication for security purposes. Running `/allow-all` skips these confirmation prompts, allowing Copilot to autonomously create/edit files, install packages, start servers, and more.
+Normally, Copilot CLI prompts the user for permission each time it reads or writes files, executes commands, or communicates externally for security purposes. Running `/allow-all` skips these confirmation prompts, allowing Copilot to autonomously create and edit files, install packages, start servers, and more.
 
 > aside negative
 >
-> **Note**: `/allow-all` is only effective for the current session. For security reasons, only use it with trusted projects. If you prefer to grant permissions individually, you can use `/add-dir` to set directory-level access permissions.
+> **Note**: `/allow-all` is only effective for the current session. For security reasons, only use it with trusted projects. If you prefer to grant permissions individually, you can also use `/add-dir` to set directory-level access permissions.
 
 ### Step 3: Select a High-end Model
 
@@ -309,7 +309,7 @@ In Fleet Mode, the following happens automatically:
 
 If errors occur during Fleet Mode implementation, try the following:
 
-- **Share the error message directly with Copilot**: Simply saying "please fix this error" is often enough
+- **Share the error message directly with Copilot**: Simply saying "Please fix this error" is often enough
 - **Check changes with `/diff`**: Verify there are no unintended changes
 - **Switch models with `/model`**: Try a different model and retry
 - **Review the design document notes**: The "Important Implementation Notes" section in `planning.md` contains solutions for common bugs
@@ -409,4 +409,4 @@ In this workshop, you learned the following:
 - [GitHub Copilot Documentation](https://docs.github.com/copilot)
 - [GitHub Copilot Best Practices](https://docs.github.com/copilot/using-github-copilot/best-practices-for-using-github-copilot)
 
-Thank you for your hard work!
+Great work!

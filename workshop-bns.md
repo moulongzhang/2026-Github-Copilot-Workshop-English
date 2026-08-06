@@ -115,7 +115,7 @@ Copilot Business uses AI Credits (UBB: usage-based billing). Before starting the
 - [Copilot CodeAct Plugin for combining multiple tool calls](https://github.com/jsturtevant/copilot-codeact-plugin)
 
 > aside positive
-> For recommendations based on your actual usage, run `/chronicle cost-tips` in Copilot App / CLI (we will use it in the final exercise). In short: "**choose the right model x avoid unnecessary context x divide the work**." In the next exercise, you will experience this in a real development flow.
+> For recommendations based on your actual usage, run `/chronicle cost-tips` in Copilot App / CLI (we will use it in the final exercise). In short: "**choose the right model × avoid unnecessary context × divide the work**." In the next exercise, you will experience this in a real development flow.
 
 ## Exercise: Develop a Token-Efficient Task Management Tool
 Duration: 3

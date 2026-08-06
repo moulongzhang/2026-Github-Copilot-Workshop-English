@@ -91,32 +91,32 @@ From here, we will use the **Copilot SDK** to build a generative AI chat tool th
 
 ### What is the Copilot SDK?
 
-The **Copilot SDK** is an SDK for controlling GitHub Copilot CLI programmatically. It communicates with Copilot CLI over JSON-RPC, allowing you to integrate capabilities such as creating AI sessions, sending and receiving messages, and receiving streaming responses into your applications.
+The **Copilot SDK** is an SDK for programmatically controlling GitHub Copilot CLI. It communicates with Copilot CLI via JSON-RPC, allowing you to integrate capabilities such as creating AI sessions, sending and receiving messages, and receiving streaming responses into your applications.
 
 **SDK Repository**: [https://github.com/github/copilot-sdk](https://github.com/github/copilot-sdk)
 
 ### What You'll Build
 
-You will build a web application that lets you chat with AI in real time from a browser:
+You'll build a web application that lets you chat with AI in real time from your browser:
 
-- **Frontend**: Browser-based chat UI (React + TypeScript)
-- **Backend**: Node.js server that manages AI sessions using the Copilot SDK
-- **Real-time communication**: Deliver streaming responses over WebSocket
+- **Frontend**: A browser-based chat UI (React + TypeScript)
+- **Backend**: A Node.js server that manages AI sessions using the Copilot SDK
+- **Real-time communication**: Delivers streaming responses over WebSocket
 
 ### Key Copilot SDK APIs
 
 | API | Description |
 |---|---|
 | `CopilotClient` | Client that manages the connection to the CLI server |
-| `client.createSession()` | Create a new conversation session |
-| `session.send()` | Send a message |
-| `session.on("assistant.message_delta")` | Receive streaming response chunks |
-| `session.on("assistant.message")` | Receive the final response |
-| `session.on("session.idle")` | Detect when session processing is complete |
-| `approveAll` | Automatically approve all tool execution permissions |
-| `createChatTools()` | Generate the standard toolset for chat |
-| `hooks.onPreToolUse` | Hook that runs before tool execution (used to validate or transform input, etc.) |
-| `hooks.onPostToolUse` | Hook that runs after tool execution (used to log or process results, etc.) |
+| `client.createSession()` | Creates a new conversation session |
+| `session.send()` | Sends a message |
+| `session.on("assistant.message_delta")` | Receives streaming response chunks |
+| `session.on("assistant.message")` | Receives the final response |
+| `session.on("session.idle")` | Detects when session processing is complete |
+| `approveAll` | Automatically approves all tool execution permissions |
+| `createChatTools()` | Generates the standard toolset for chat |
+| `hooks.onPreToolUse` | Hook that runs before tool execution (used for input validation, transformation, and more) |
+| `hooks.onPostToolUse` | Hook that runs after tool execution (used for logging, processing results, and more) |
 
 ### Basic SDK Usage
 
@@ -149,12 +149,12 @@ await session.send({ prompt: "Hello!" });
 
 > aside positive
 >
-> **Key Point of This Section**: Without preparing a design document or detailed specifications, you will build a web application using the SDK all at once by giving Copilot CLI **a single prompt**. Experience the productivity of AI-driven development.
+> **Key Point of This Section**: Without preparing a design document or detailed specifications, you'll build a web application using the SDK all at once simply by giving Copilot CLI **a single prompt**. Experience the productivity of AI-driven development.
 
-## Let's Implement with Vibe Coding
+## Implement with Vibe Coding
 Duration: 60
 
-Now that you understand the Copilot SDK overview, it's time to implement the browser-based AI chat tool with **Vibe Coding**.
+Now that you understand the Copilot SDK overview, it's time to implement a browser-based AI chat tool with **Vibe Coding**.
 
 ### Step 1: Launch Copilot CLI
 
@@ -170,13 +170,13 @@ copilot
 /allow-all
 ```
 
-`/allow-all` is a command that grants Copilot CLI **all permissions for tool execution, file access, and external URL access** at once.
+`/allow-all` is a command that grants **all permissions at once for tool execution, file access, and external URL access** to Copilot CLI.
 
 Normally, Copilot CLI prompts the user for permission each time it reads or writes files, executes commands, or communicates externally for security purposes. Running `/allow-all` skips these confirmation prompts, allowing Copilot to autonomously create and edit files, install packages, start servers, and more.
 
 > aside negative
 >
-> **Note**: `/allow-all` is only effective for the current session. For security reasons, only use it with trusted projects. If you prefer to grant permissions individually, you can use `/add-dir` to set directory-level access permissions.
+> **Note**: `/allow-all` is only effective for the current session. For security reasons, only use it with trusted projects. If you prefer to grant permissions individually, you can also use `/add-dir` to set directory-level access permissions.
 
 ### Step 3: Select a High-end Model
 
@@ -184,18 +184,18 @@ Normally, Copilot CLI prompts the user for permission each time it reads or writ
 /model
 ```
 
-Select the most powerful model available from the model list (for example, Claude Opus 4.6). A high-end model with strong reasoning capabilities is effective for building a web application with multiple components.
+From the list of models, select the most powerful model (for example, Claude Opus 4.6). A high-end model with strong reasoning capabilities is effective for building a web application with multiple components.
 
 ### Step 4: Switch to Autopilot Mode
 
-Press **Shift+Tab** to switch Copilot CLI to **Autopilot mode**. In Autopilot mode, Copilot autonomously creates and edits files and executes commands without confirmation, making it ideal for Vibe Coding that implements a large feature all at once.
+Press **Shift+Tab** to switch Copilot CLI to **Autopilot mode**. In Autopilot mode, Copilot autonomously creates and edits files and executes commands without asking for confirmation, making it ideal for Vibe Coding large implementations all at once.
 
-### Step 5: Implement Everything with a Single Prompt
+### Step 5: Implement Everything at Once with a Single Prompt
 
-Give Copilot CLI the following prompt. The `/fleet` command runs multiple agents in parallel to build a browser-based AI chat tool using the SDK all at once:
+Enter the following prompt in Copilot CLI. The `/fleet` command runs multiple agents in parallel to build a browser-based AI chat tool using the SDK all at once:
 
 ```
-/fleet Build an AI chat web application that runs in the browser using the Copilot SDK in the copilotWebRelay/ directory.
+/fleet Using the Copilot SDK, build an AI chat web application that runs in a browser in the copilotWebRelay/ directory.
 
 SDK reference: https://github.com/github/copilot-sdk
 
@@ -203,13 +203,13 @@ Requirements:
 - Backend: Node.js + Express + WebSocket server
   - Manage sessions with the Copilot SDK's CopilotClient
   - Use model "gpt-5" with createSession(), and use approveAll for onPermissionRequest
-  - Deliver streaming responses to the client over WebSocket with session.on("assistant.message_delta")
-  - Signal completion with session.on("session.idle")
+  - Stream responses to the client over WebSocket with session.on("assistant.message_delta")
+  - Notify the client of completion with session.on("session.idle")
 - Frontend: React + TypeScript + Vite
-  - Modern chat UI (message input, send button, and chat history)
-  - Connect to the server over WebSocket and display streaming responses in real time
+  - Modern chat UI (message input field, send button, and chat history display)
+  - Connect to the server with WebSocket and display streaming responses in real time
   - Support Markdown rendering
-- Development environment: Backend and frontend can be started together using npm scripts
+- Development environment: Backend and frontend can be started simultaneously with npm scripts
 - Verify that the application works
 ```
 
@@ -228,19 +228,19 @@ If errors occur during implementation, try the following:
 > aside negative
 >
 > **Common Pitfalls**:
-> - **Installing the Copilot SDK**: Verify that `npm install @github/copilot-sdk` ran successfully
-> - **Authentication**: Verify that Copilot CLI is logged in (the `copilot` command works)
+> - **Installing the Copilot SDK**: Make sure `npm install @github/copilot-sdk` runs successfully
+> - **Authentication**: Make sure Copilot CLI is signed in (the `copilot` command works)
 > - **Vite WebSocket proxy**: You need to specify `http://` instead of `ws://` for the `target`
 > - **React StrictMode**: `useEffect` running twice can cause unstable WebSocket connections
 
-## Copilot Code Review — Code Reviews with Multiple Models
+## Copilot Code Review — Code Review with Multiple Models
 Duration: 30
 
-Once the Copilot Web Relay implementation is complete, use **Copilot CLI's review-related commands** to review the code with multiple AI models. The goal is to identify quality, security, and performance issues from multiple perspectives offered by different models.
+Once the Copilot Web Relay implementation is complete, use the **review-related Copilot CLI commands** to conduct code reviews with multiple AI models. The goal is to identify quality, security, and performance issues from the different perspectives of multiple models.
 
 ### Key Commands for Reviews
 
-Copilot CLI provides several commands that can be used for code reviews.
+Copilot CLI provides several commands that you can use for code reviews.
 
 | Command | Description |
 |---|---|
@@ -250,10 +250,10 @@ Copilot CLI provides several commands that can be used for code reviews.
 
 ### Step 1: Commit & Push the Code
 
-In Copilot CLI, give the following instruction to commit and push the implementation:
+In Copilot CLI, enter the following prompt to commit and push the implementation:
 
 ```
-Stage all the implemented Copilot Web Relay code with git add, commit it with an appropriate commit message, push it to the feature/copilot-web-relay branch, and create a pull request targeting the main branch.
+Stage all of the implemented Copilot Web Relay code with git add, commit it with an appropriate commit message, push it to the feature/copilot-web-relay branch, and create a pull request to the main branch.
 ```
 
 ### Step 2: Review with Multiple Models & Comment on the Pull Request
@@ -261,25 +261,25 @@ Stage all the implemented Copilot Web Relay code with git add, commit it with an
 Enter the following prompt in Copilot CLI to run reviews with multiple models and post the results as a PR comment all at once:
 
 ```
-/review Review the pull request with the Opus 4.6 and GPT-5.4 models, summarize the results, and post the results as a comment on the pull request.
+/review Please review the Pull Request with each of the opus4.6 and GPT5.4 models, summarize the results, and leave the results as a comment on the Pull Request
 ```
 
-With this prompt alone, the following steps run automatically:
+With this prompt alone, the following actions are performed automatically:
 
 - Code review by **Claude Opus 4.6**
 - Code review by **GPT-5.4**
-- Integration and comparison of the review results from each model
-- Posting a review comment to the Pull Request
+- Integration and comparison of each model's review results
+- Posting a review comment on the Pull Request
 
-If there is a problem with a fix, use `/undo` to rewind the previous turn and revert the file changes.
+If there is a problem with the changes, you can use `/undo` to rewind the previous turn and revert the file changes.
 
 > aside positive
 >
-> **Benefits of Multi-model Reviews**:
+> **Benefits of Multi-Model Reviews**:
 > - **Claude**: Strong at detecting logical inconsistencies and edge cases
-> - **GPT**: Skilled at identifying a broad range of best practices
+> - **GPT**: Skilled at identifying a wide range of best practices
 >
-> Issues identified by multiple models have high confidence and should be fixed as a priority.
+> Issues identified by multiple models are highly reliable and should be fixed first.
 
 ### Step 3: Code Review on GitHub
 
@@ -293,10 +293,10 @@ Let's also use Copilot Code Review on GitHub:
 > aside positive
 >
 > **When to Use CLI Reviews vs. GitHub Reviews**:
-> - **`/review` (CLI)**: Immediately reviews local diffs. This helps you identify issues early in development
+> - **`/review` (CLI)**: Immediately reviews local changes. It can detect issues early during development
 > - **GitHub Code Review**: Reviews Pull Request diffs and leaves formal review comments. This is ideal for team review workflows
 >
-> Combining both helps you maintain quality from the early stages of development.
+> Combining both helps ensure quality from the early stages of development.
 
 ## Agentic Workflow — Automating the Development Process with AI Agents
 Duration: 20
@@ -458,4 +458,4 @@ In this workshop, you learned the following:
 - [GitHub Copilot Best Practices](https://docs.github.com/copilot/using-github-copilot/best-practices-for-using-github-copilot)
 - [GitHub Copilot CLI](https://docs.github.com/copilot/github-copilot-in-the-cli)
 
-Thank you for your hard work!
+Great work!

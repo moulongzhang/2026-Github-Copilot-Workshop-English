@@ -312,8 +312,8 @@ The purpose of the workflow is as follows:
 <pre><code>/allow-all
 </code></pre>
 <p><code>/allow-all</code> is a command that grants <strong>all permissions at once for tool execution, file access, and external URL access</strong> to Copilot CLI.</p>
-<p>Normally, Copilot CLI prompts the user for permission each time it performs file read/write operations, command execution, or external communication for security purposes. Running <code>/allow-all</code> skips these confirmation prompts, allowing Copilot to autonomously create/edit files, install packages, start servers, and more.</p>
-<aside class="warning"><p><strong>Note</strong>: <code>/allow-all</code> is only effective for the current session. For security reasons, only use it with trusted projects. If you prefer to grant permissions individually, you can use <code>/add-dir</code> to set directory-level access permissions.</p>
+<p>Normally, Copilot CLI prompts the user for permission each time it reads or writes files, executes commands, or communicates externally for security purposes. Running <code>/allow-all</code> skips these confirmation prompts, allowing Copilot to autonomously create and edit files, install packages, start servers, and more.</p>
+<aside class="warning"><p><strong>Note</strong>: <code>/allow-all</code> is only effective for the current session. For security reasons, only use it with trusted projects. If you prefer to grant permissions individually, you can also use <code>/add-dir</code> to set directory-level access permissions.</p>
 </aside>
 <h2 is-upgraded>Step 3: Select a High-end Model</h2>
 <pre><code>/model Claude Opus 4.6
@@ -336,7 +336,7 @@ The purpose of the workflow is as follows:
 <h2 is-upgraded>Hints If You Get Stuck</h2>
 <p>If errors occur during Fleet Mode implementation, try the following:</p>
 <ul>
-<li><strong>Share the error message directly with Copilot</strong>: Simply saying &#34;please fix this error&#34; is often enough</li>
+<li><strong>Share the error message directly with Copilot</strong>: Simply saying &#34;Please fix this error&#34; is often enough</li>
 <li><strong>Check changes with </strong><strong><code>/diff</code></strong>: Verify there are no unintended changes</li>
 <li><strong>Switch models with </strong><strong><code>/model</code></strong>: Try a different model and retry</li>
 <li><strong>Review the design document notes</strong>: The &#34;Important Implementation Notes&#34; section in <code>planning.md</code> contains solutions for common bugs</li>
@@ -409,7 +409,7 @@ The purpose of the workflow is as follows:
 <li><a href="https://docs.github.com/copilot" target="_blank">GitHub Copilot Documentation</a></li>
 <li><a href="https://docs.github.com/copilot/using-github-copilot/best-practices-for-using-github-copilot" target="_blank">GitHub Copilot Best Practices</a></li>
 </ul>
-<p>Thank you for your hard work!</p>
+<p>Great work!</p>
 
 
       </google-codelab-step>

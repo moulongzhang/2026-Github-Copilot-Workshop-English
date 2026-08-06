@@ -136,7 +136,7 @@ The architecture has been finalized through our conversation so far. Based on ou
 ```
 
 > aside positive
-> When you reach a good stopping point in your Copilot Chat conversation, starting a new conversation allows you to give Copilot clearer instructions. To start a new conversation, click the "New Conversation" button at the top of the chat window. When doing so, it's helpful to save content you want to reference in future chats - like this architecture document - to a file, as we did here.
+> When you reach a good stopping point in your Copilot Chat conversation, starting a new conversation allows you to give Copilot clearer instructions. To start a new conversation, click the **New Chat** (`+`) button at the top of the Chat view. When doing so, it's helpful to save content you want to reference in future chats - like this architecture document - to a file, as we did here.
 
 ## Let's Identify What Needs to Be Done
 Duration: 10
@@ -448,7 +448,7 @@ This instruction causes Copilot to:
    - Acceptance criteria
    - Appropriate labels and priority
 
-This enables planned project management and agile development.
+This enables structured project management and agile development.
 
 ![MCP Issues](github-copilot-workshop/img/mcp-issues.png)
 
