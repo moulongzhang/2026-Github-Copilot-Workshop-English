@@ -1,4 +1,4 @@
-module github.com/moulongzhang/2026-Github-Copilot-Workshop
+module github.com/moulongzhang/2026-Github-Copilot-Workshop-English
 
 go 1.26.3
 

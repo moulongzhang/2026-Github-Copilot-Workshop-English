@@ -30,7 +30,7 @@ cd 2026-Github-Copilot-Workshop-English
 
 ### Required Tools
 
-- **Go** (1.24 or later): Required to run claat
+- **Go** (1.26.3 or later, as declared in `go.mod`): Required to run claat
 - **claat** (Codelabs as a Thing): Generates Codelabs-formatted HTML from Markdown files. Its version is pinned by the `tool` directive in `go.mod`
 - **make**: Runs the workshop export tasks defined in `Makefile`
 - **jq**: Reads the default version from `github-copilot-workshop/versions.json`
@@ -124,6 +124,22 @@ Open `http://localhost:9090` in your browser to view the generated workshop.
 | `make export VERSION=<version>` | Export `workshop.md` to a specified version |
 | `make export-custom NAME=<name>` | Export `workshop-<name>.md` to the matching custom output directory |
 
+### 5. Other Useful claat Commands
+
+```bash
+# Show help
+go tool claat help
+
+# Export in a specific format
+go tool claat export -f html workshop.md
+
+# Update existing content
+go tool claat update workshop.md
+
+# Export multiple files at once
+go tool claat export *.md
+```
+
 ## 📂 Directory Structure
 
 ```
@@ -146,7 +162,7 @@ Open `http://localhost:9090` in your browser to view the generated workshop.
 │   │   └── <NAME>/
 │   │       └── index.html       # Generated customer-specific workshop
 │   └── img/                     # Shared image files
-├── assets/                      # Other assets
+├── bns/                         # Short-link redirect to the BNS workshop
 └── registrations/               # Registration information
 ```
 
@@ -185,8 +201,8 @@ git subtree push --prefix github-copilot-workshop origin gh-pages
 
 ## 📄 License
 
-For the license of this workshop content, please refer to the LICENSE file in the repository.
+No license has been declared for this workshop content yet.
 
 ## 🤝 Contributing
 
-Suggestions for improvements and fixes to the workshop are welcome via Issues and Pull Requests.
+Suggestions for improvements and fixes to the workshop are welcome via issues and pull requests.
