@@ -1,0 +1,466 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>DENSO GitHub Copilot Workshop</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/claat-public/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="UA-49880327-14" ga4id=""></google-codelab-analytics>
+  <google-codelab codelab-gaid=""
+                  codelab-ga4id=""
+                  id="github-copilot-workshop"
+                  title="DENSO GitHub Copilot Workshop"
+                  environment="web"
+                  feedback-link="https://example.com/feedback">
+    
+      <google-codelab-step label="About This Workshop" duration="5">
+        <p>Welcome to the GitHub Copilot Workshop!</p>
+<p class="image-container"><img alt="GitHub Copilot Logo" src="../../img/dcd9c52ce37f5b19.png"></p>
+<p>In this workshop, you will experience the latest in AI-driven development, with a focus on <strong>GitHub Copilot CLI</strong>. Copilot CLI is an interactive AI assistant that runs in the terminal and can autonomously perform a wide range of tasks, including code generation, review, and refactoring.</p>
+<h2 is-upgraded>Today&#39;s Goals</h2>
+<ul>
+<li>Understand the basic operations of GitHub Copilot CLI</li>
+<li>Experience web application development using the Copilot SDK</li>
+<li>Practice code reviews using multiple AI models</li>
+<li>Build development process automation with Agentic Workflows</li>
+</ul>
+<h2 is-upgraded>Today&#39;s Agenda</h2>
+<table>
+<tr><td colspan="1" rowspan="1"><p>Step</p>
+</td><td colspan="1" rowspan="1"><p>Topic</p>
+</td><td colspan="1" rowspan="1"><p>Overview</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>1</p>
+</td><td colspan="1" rowspan="1"><p>About This Workshop</p>
+</td><td colspan="1" rowspan="1"><p>Review the workshop overview and goals</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>2</p>
+</td><td colspan="1" rowspan="1"><p>Project Setup</p>
+</td><td colspan="1" rowspan="1"><p>Create a repository and prepare the development environment</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>3</p>
+</td><td colspan="1" rowspan="1"><p>Build an AI Chat Tool with the Copilot SDK</p>
+</td><td colspan="1" rowspan="1"><p>Build a web application with the Copilot SDK using a single prompt</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>4</p>
+</td><td colspan="1" rowspan="1"><p>Copilot Code Review</p>
+</td><td colspan="1" rowspan="1"><p>Review code using multiple models</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>5</p>
+</td><td colspan="1" rowspan="1"><p>Agentic Workflow</p>
+</td><td colspan="1" rowspan="1"><p>Automate the development process with AI agents</p>
+</td></tr>
+</table>
+<h2 is-upgraded>Prerequisites</h2>
+<ul>
+<li>Visual Studio Code is installed</li>
+<li>You have a GitHub Copilot license (Business/Enterprise plan recommended)</li>
+<li>You have a GitHub account</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Project Setup" duration="15">
+        <p>In this workshop, we will use the following GitHub repository:</p>
+<p><strong>Project URL</strong>: https://github.com/moulongzhang/2026-Github-Copilot-Workshop-Python</p>
+<h2 is-upgraded>Step 1: Create a Repository from the Template</h2>
+<p>First, open the project URL above in your browser and create your own repository from the template:</p>
+<ol type="1">
+<li>Open the project URL (https://github.com/moulongzhang/2026-Github-Copilot-Workshop-Python) in your browser</li>
+<li>Click the <strong>Use this template</strong> button in the upper right and select <strong>Create a new repository</strong></li>
+</ol>
+<p><img alt="Click Use this template button" src="../../img/c09446109f5e979b.png"> Once the template creation is complete, a new repository will be created under your GitHub account.</p>
+<h2 is-upgraded>Step 2: Set Up the Development Environment</h2>
+<p>Use the repository you created to set up a development environment with GitHub Codespaces:</p>
+<ol type="1">
+<li>Go to the page for the repository you created (<code>https://github.com/copilot-hands-on/[repository-name]</code>)</li>
+<li>Click the green <strong>Code</strong> button</li>
+<li>Select the <strong>Codespaces</strong> tab</li>
+<li>Click <strong>Create codespace on main</strong></li>
+</ol>
+<p class="image-container"><img alt="Codespaces Setup" src="../../img/da697969a846a2d4.png"></p>
+<h2 is-upgraded>Step 3: Verify Copilot Settings</h2>
+<p>Let&#39;s enable the Copilot features available on GitHub.</p>
+<ol type="1">
+<li>Click your profile icon in the upper right of GitHub</li>
+<li>Select <strong>Copilot Settings</strong></li>
+</ol>
+<p class="image-container"><img alt="Copilot Settings" src="../../img/e0788a8fe3eff510.png"></p>
+<p>Enable the following features:</p>
+<ul>
+<li><strong>Copilot CLI</strong> - Use Copilot in the terminal</li>
+<li><strong>Copilot code review</strong> - Code review feature</li>
+</ul>
+<aside class="warning"><p><strong>Plan Limitations</strong>: Features such as Copilot Code Review and Copilot CLI are only available with GitHub Copilot Business/Enterprise plans.</p>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Let&#39;s Build an AI Chat Tool with the Copilot SDK" duration="10">
+        <p>From here, we will use the <strong>Copilot SDK</strong> to build a generative AI chat tool that runs in the browser <strong>from Copilot CLI with a single prompt</strong>.</p>
+<h2 is-upgraded>What is the Copilot SDK?</h2>
+<p>The <strong>Copilot SDK</strong> is an SDK for controlling GitHub Copilot CLI programmatically. It communicates with Copilot CLI over JSON-RPC, allowing you to integrate capabilities such as creating AI sessions, sending and receiving messages, and receiving streaming responses into your applications.</p>
+<p><strong>SDK Repository</strong>: <a href="https://github.com/github/copilot-sdk" target="_blank">https://github.com/github/copilot-sdk</a></p>
+<h2 is-upgraded>What You&#39;ll Build</h2>
+<p>You will build a web application that lets you chat with AI in real time from a browser:</p>
+<ul>
+<li><strong>Frontend</strong>: Browser-based chat UI (React + TypeScript)</li>
+<li><strong>Backend</strong>: Node.js server that manages AI sessions using the Copilot SDK</li>
+<li><strong>Real-time communication</strong>: Deliver streaming responses over WebSocket</li>
+</ul>
+<h2 is-upgraded>Key Copilot SDK APIs</h2>
+<table>
+<tr><td colspan="1" rowspan="1"><p>API</p>
+</td><td colspan="1" rowspan="1"><p>Description</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><code>CopilotClient</code></p>
+</td><td colspan="1" rowspan="1"><p>Client that manages the connection to the CLI server</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><code>client.createSession()</code></p>
+</td><td colspan="1" rowspan="1"><p>Create a new conversation session</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><code>session.send()</code></p>
+</td><td colspan="1" rowspan="1"><p>Send a message</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><code>session.on("assistant.message_delta")</code></p>
+</td><td colspan="1" rowspan="1"><p>Receive streaming response chunks</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><code>session.on("assistant.message")</code></p>
+</td><td colspan="1" rowspan="1"><p>Receive the final response</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><code>session.on("session.idle")</code></p>
+</td><td colspan="1" rowspan="1"><p>Detect when session processing is complete</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><code>approveAll</code></p>
+</td><td colspan="1" rowspan="1"><p>Automatically approve all tool execution permissions</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><code>createChatTools()</code></p>
+</td><td colspan="1" rowspan="1"><p>Generate the standard toolset for chat</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><code>hooks.onPreToolUse</code></p>
+</td><td colspan="1" rowspan="1"><p>Hook that runs before tool execution (used to validate or transform input, etc.)</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><code>hooks.onPostToolUse</code></p>
+</td><td colspan="1" rowspan="1"><p>Hook that runs after tool execution (used to log or process results, etc.)</p>
+</td></tr>
+</table>
+<h2 is-upgraded>Basic SDK Usage</h2>
+<pre><code language="language-javascript" class="language-javascript">import { CopilotClient, approveAll, createChatTools } from &#34;@github/copilot-sdk&#34;;
+
+const client = new CopilotClient();
+await client.start();
+
+const session = await client.createSession({
+    model: &#34;gpt-5&#34;,
+    onPermissionRequest: approveAll,
+    tools: createChatTools(),
+    hooks: {
+        onPreToolUse: (input, invocation) =&gt; {
+            console.log(`Before tool execution: ${invocation.toolName}`, input);
+        },
+        onPostToolUse: (input, invocation) =&gt; {
+            console.log(`After tool execution: ${invocation.toolName}`, input);
+        },
+    },
+});
+
+session.on(&#34;assistant.message_delta&#34;, (event) =&gt; {
+    process.stdout.write(event.data.deltaContent);
+});
+
+await session.send({ prompt: &#34;Hello!&#34; });
+</code></pre>
+<aside class="special"><p><strong>Key Point of This Section</strong>: Without preparing a design document or detailed specifications, you will build a web application using the SDK all at once by giving Copilot CLI <strong>a single prompt</strong>. Experience the productivity of AI-driven development.</p>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Let&#39;s Implement with Vibe Coding" duration="60">
+        <p>Now that you understand the Copilot SDK overview, it&#39;s time to implement the browser-based AI chat tool with <strong>Vibe Coding</strong>.</p>
+<h2 is-upgraded>Step 1: Launch Copilot CLI</h2>
+<p>Launch Copilot CLI in the VS Code terminal.</p>
+<pre><code language="language-bash" class="language-bash">copilot
+</code></pre>
+<h2 is-upgraded>Step 2: Allow All Permissions</h2>
+<pre><code>/allow-all
+</code></pre>
+<p><code>/allow-all</code> is a command that grants Copilot CLI <strong>all permissions for tool execution, file access, and external URL access</strong> at once.</p>
+<p>Normally, Copilot CLI prompts the user for permission each time it reads or writes files, executes commands, or communicates externally for security purposes. Running <code>/allow-all</code> skips these confirmation prompts, allowing Copilot to autonomously create and edit files, install packages, start servers, and more.</p>
+<aside class="warning"><p><strong>Note</strong>: <code>/allow-all</code> is only effective for the current session. For security reasons, only use it with trusted projects. If you prefer to grant permissions individually, you can use <code>/add-dir</code> to set directory-level access permissions.</p>
+</aside>
+<h2 is-upgraded>Step 3: Select a High-end Model</h2>
+<pre><code>/model
+</code></pre>
+<p>Select the most powerful model available from the model list (for example, Claude Opus 4.6). A high-end model with strong reasoning capabilities is effective for building a web application with multiple components.</p>
+<h2 is-upgraded>Step 4: Switch to Autopilot Mode</h2>
+<p>Press <strong>Shift+Tab</strong> to switch Copilot CLI to <strong>Autopilot mode</strong>. In Autopilot mode, Copilot autonomously creates and edits files and executes commands without confirmation, making it ideal for Vibe Coding that implements a large feature all at once.</p>
+<h2 is-upgraded>Step 5: Implement Everything with a Single Prompt</h2>
+<p>Give Copilot CLI the following prompt. The <code>/fleet</code> command runs multiple agents in parallel to build a browser-based AI chat tool using the SDK all at once:</p>
+<pre><code>/fleet Build an AI chat web application that runs in the browser using the Copilot SDK in the copilotWebRelay/ directory.
+
+SDK reference: https://github.com/github/copilot-sdk
+
+Requirements:
+- Backend: Node.js + Express + WebSocket server
+  - Manage sessions with the Copilot SDK&#39;s CopilotClient
+  - Use model &#34;gpt-5&#34; with createSession(), and use approveAll for onPermissionRequest
+  - Deliver streaming responses to the client over WebSocket with session.on(&#34;assistant.message_delta&#34;)
+  - Signal completion with session.on(&#34;session.idle&#34;)
+- Frontend: React + TypeScript + Vite
+  - Modern chat UI (message input, send button, and chat history)
+  - Connect to the server over WebSocket and display streaming responses in real time
+  - Support Markdown rendering
+- Development environment: Backend and frontend can be started together using npm scripts
+- Verify that the application works
+</code></pre>
+<aside class="special"><p><strong>Single-Prompt Tip</strong>: Structure the requirements as a bulleted list and clearly specify the technology stack, SDK APIs, and expected behavior so Copilot can build the application accurately.</p>
+</aside>
+<h2 is-upgraded>Hints If You Get Stuck</h2>
+<p>If errors occur during implementation, try the following:</p>
+<ul>
+<li><strong>Share the error message directly with Copilot</strong>: Simply saying &#34;Please fix this error&#34; is often enough</li>
+<li><strong>Check changes with </strong><strong><code>/diff</code></strong>: Verify there are no unintended changes</li>
+<li><strong>Switch models with </strong><strong><code>/model</code></strong>: Try a different model and retry</li>
+</ul>
+<aside class="warning"><p><strong>Common Pitfalls</strong>:</p>
+<ul>
+<li><strong>Installing the Copilot SDK</strong>: Verify that <code>npm install @github/copilot-sdk</code> ran successfully</li>
+<li><strong>Authentication</strong>: Verify that Copilot CLI is logged in (the <code>copilot</code> command works)</li>
+<li><strong>Vite WebSocket proxy</strong>: You need to specify <code>http://</code> instead of <code>ws://</code> for the <code>target</code></li>
+<li><strong>React StrictMode</strong>: <code>useEffect</code> running twice can cause unstable WebSocket connections</li>
+</ul>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Copilot Code Review — Code Reviews with Multiple Models" duration="30">
+        <p>Once the Copilot Web Relay implementation is complete, use <strong>Copilot CLI&#39;s review-related commands</strong> to review the code with multiple AI models. The goal is to identify quality, security, and performance issues from multiple perspectives offered by different models.</p>
+<h2 is-upgraded>Key Commands for Reviews</h2>
+<p>Copilot CLI provides several commands that can be used for code reviews.</p>
+<table>
+<tr><td colspan="1" rowspan="1"><p>Command</p>
+</td><td colspan="1" rowspan="1"><p>Description</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><code>/review</code></p>
+</td><td colspan="1" rowspan="1"><p>Run the code review agent to analyze changes</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><code>/model</code></p>
+</td><td colspan="1" rowspan="1"><p>Select the AI model to use (Claude, GPT, Gemini, etc.)</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><code>/undo</code></p>
+</td><td colspan="1" rowspan="1"><p>Rewind the previous turn and revert file changes</p>
+</td></tr>
+</table>
+<h2 is-upgraded>Step 1: Commit &amp; Push the Code</h2>
+<p>In Copilot CLI, give the following instruction to commit and push the implementation:</p>
+<pre><code>Stage all the implemented Copilot Web Relay code with git add, commit it with an appropriate commit message, push it to the feature/copilot-web-relay branch, and create a pull request targeting the main branch.
+</code></pre>
+<h2 is-upgraded>Step 2: Review with Multiple Models &amp; Comment on the Pull Request</h2>
+<p>Enter the following prompt in Copilot CLI to run reviews with multiple models and post the results as a PR comment all at once:</p>
+<pre><code>/review Review the pull request with the Opus 4.6 and GPT-5.4 models, summarize the results, and post the results as a comment on the pull request.
+</code></pre>
+<p>With this prompt alone, the following steps run automatically:</p>
+<ul>
+<li>Code review by <strong>Claude Opus 4.6</strong></li>
+<li>Code review by <strong>GPT-5.4</strong></li>
+<li>Integration and comparison of the review results from each model</li>
+<li>Posting a review comment to the Pull Request</li>
+</ul>
+<p>If there is a problem with a fix, use <code>/undo</code> to rewind the previous turn and revert the file changes.</p>
+<aside class="special"><p><strong>Benefits of Multi-model Reviews</strong>:</p>
+<ul>
+<li><strong>Claude</strong>: Strong at detecting logical inconsistencies and edge cases</li>
+<li><strong>GPT</strong>: Skilled at identifying a broad range of best practices</li>
+</ul>
+<p>Issues identified by multiple models have high confidence and should be fixed as a priority.</p>
+</aside>
+<h2 is-upgraded>Step 3: Code Review on GitHub</h2>
+<p>Let&#39;s also use Copilot Code Review on GitHub:</p>
+<ol type="1">
+<li>Open the Pull Request on GitHub</li>
+<li>Assign <strong>Copilot</strong> as a reviewer in the <strong>Reviewers</strong> section</li>
+</ol>
+<p class="image-container"><img alt="Copilot Auto-assign Settings" src="../../img/bc9c16ab7a83d165.png"></p>
+<aside class="special"><p><strong>When to Use CLI Reviews vs. GitHub Reviews</strong>:</p>
+<ul>
+<li><strong><code>/review</code></strong><strong> (CLI)</strong>: Immediately reviews local diffs. This helps you identify issues early in development</li>
+<li><strong>GitHub Code Review</strong>: Reviews Pull Request diffs and leaves formal review comments. This is ideal for team review workflows</li>
+</ul>
+<p>Combining both helps you maintain quality from the early stages of development.</p>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Agentic Workflow — Automating the Development Process with AI Agents" duration="20">
+        <p>In the final step, let&#39;s build a <strong>GitHub Agentic Workflow</strong> and experience how AI agents can autonomously automate the development process.</p>
+<h2 is-upgraded>What is an Agentic Workflow?</h2>
+<p>An <strong>Agentic Workflow</strong> is a mechanism in which AI agents autonomously perform tasks on GitHub Actions. It was announced as a technical preview on February 13, 2026.</p>
+<p>Traditional GitHub Actions execute predefined steps in order, while an Agentic Workflow allows <strong>AI to assess the situation and autonomously decide and execute the necessary actions</strong>.</p>
+<h2 is-upgraded>What Can It Do?</h2>
+<p>With Agentic Workflows, you can delegate development tasks like the following to AI agents:</p>
+<table>
+<tr><td colspan="1" rowspan="1"><p>Use Case</p>
+</td><td colspan="1" rowspan="1"><p>Description</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><strong>Automatic issue triage</strong></p>
+</td><td colspan="1" rowspan="1"><p>AI analyzes new issues and automatically applies labels, assigns owners, and sets priorities</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><strong>Automated PR reviews</strong></p>
+</td><td colspan="1" rowspan="1"><p>AI reviews Pull Request changes and automatically posts comments and improvement suggestions</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><strong>CI error analysis and fixes</strong></p>
+</td><td colspan="1" rowspan="1"><p>AI analyzes CI/CD pipeline errors, identifies root causes, and automatically creates fix PRs</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><strong>Documentation management</strong></p>
+</td><td colspan="1" rowspan="1"><p>Automatically updates documentation in response to code changes, maintaining consistency between code and documentation</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><strong>Release note generation</strong></p>
+</td><td colspan="1" rowspan="1"><p>Automatically generates release notes from merged PRs and commit history</p>
+</td></tr>
+</table>
+<h2 is-upgraded>Key Benefits</h2>
+<ul>
+<li><strong>Written in natural language</strong>: Simply describe the workflow&#39;s purpose in natural language (Markdown), and AI determines and executes the necessary processing</li>
+<li><strong>Flexible triggers</strong>: Supports a variety of trigger conditions, including schedules, events (pushes and PR creation), and issue comment commands</li>
+<li><strong>Autonomous decision-making</strong>: The AI agent understands code changes and decides what needs to be done</li>
+</ul>
+<h2 is-upgraded>Getting Started</h2>
+<p>Agentic Workflows are created using the <code>gh aw</code> CLI extension:</p>
+<ol type="1">
+<li><strong>Create a Markdown file</strong> — Describe the workflow&#39;s purpose and behavior in natural language</li>
+<li><strong>Compile</strong> — <code>gh aw</code> converts the Markdown into a GitHub Actions workflow YAML file</li>
+<li><strong>Commit &amp; Push</strong> — The workflow is added to the repository and runs automatically based on its trigger conditions</li>
+</ol>
+<aside class="special"><p><strong>Reference</strong>: Many sample use cases are available in &#34;Peli&#39;s Agent Factory&#34; (https://github.com/peli-pro-hq/agent-factory).</p>
+</aside>
+<h2 is-upgraded>Step 1: Create a PAT (Personal Access Token)</h2>
+<p>Create a Personal Access Token so the Agentic Workflow can use Copilot in GitHub Actions.</p>
+<h3 is-upgraded>Create a Fine-grained PAT</h3>
+<p>Visit the following URL to create a new Fine-grained PAT:</p>
+<p><a href="https://github.com/settings/personal-access-tokens/new" target="_blank">https://github.com/settings/personal-access-tokens/new</a></p>
+<p>Configuration:</p>
+<ul>
+<li><strong>Token name</strong>: Enter any name you like (e.g., <code>copilot-workshop</code>)</li>
+<li><strong>Resource owner</strong>: Select your user account</li>
+<li><strong>Repository access</strong>: Select <strong>Public repositories</strong></li>
+<li><strong>Permissions</strong>: Enable <strong>Copilot Requests</strong></li>
+</ul>
+<p class="image-container"><img alt="Creating a Fine-grained PAT" src="../../img/14b892fb9208458f.png"></p>
+<p>After creation, make sure to copy the displayed PAT.</p>
+<aside class="warning"><p><strong>⚠️ Note</strong>: The PAT is only displayed on the screen immediately after creation. It cannot be viewed again after navigating away, so be sure to copy it at this time.</p>
+</aside>
+<h3 is-upgraded>Set as a Repository Secret</h3>
+<p>Set the created PAT as a repository secret:</p>
+<ol type="1">
+<li>Click the <strong>Settings</strong> tab in your repository</li>
+<li>Select <strong>Secrets and variables</strong> → <strong>Actions</strong> from the left sidebar</li>
+<li>Click <strong>New repository secret</strong></li>
+<li>Enter the following: <ul>
+<li><strong>Name</strong>: <code>COPILOT_GITHUB_TOKEN</code></li>
+<li><strong>Value</strong>: Paste the PAT you just created</li>
+</ul>
+</li>
+<li>Click <strong>Add secret</strong></li>
+</ol>
+<h3 is-upgraded>Verify Workflow Permissions</h3>
+<ol type="1">
+<li>Click the <strong>Settings</strong> tab in your repository</li>
+<li>Select <strong>Actions</strong> → <strong>General</strong> from the left sidebar</li>
+<li>In the <strong>Workflow permissions</strong> section, verify that <strong>Allow GitHub Actions to create and approve pull requests</strong> is checked</li>
+<li>If not checked, enable it and click <strong>Save</strong></li>
+</ol>
+<h2 is-upgraded>Step 2: Create an Automatic Documentation Update Workflow</h2>
+<p>First, let&#39;s create an Agentic Workflow that automatically updates documentation in response to code changes. Enter the following prompt in Copilot CLI:</p>
+<pre><code>Please create a GitHub Agentic Workflow by referencing the following URL.
+https://github.com/github/gh-aw/blob/main/create.md
+
+The purpose of the workflow is as follows:
+- It runs when code under copilotWebRelay is updated
+- It updates the documentation under copilotWebRelay/docs based on the code under copilotWebRelay, ensuring that source code and documentation are always in sync
+</code></pre>
+<h2 is-upgraded>Step 3: Verify the Workflow</h2>
+<p>Once the workflow has been created, make a code change to verify that it works:</p>
+<ol type="1">
+<li>Make a small change to the Copilot Web Relay code (e.g., add a comment or improve a function)</li>
+<li>Commit and push the change</li>
+<li>Verify that the workflow is running on GitHub&#39;s <strong>Actions</strong> tab</li>
+<li>After the workflow completes, verify that a <strong>Pull Request</strong> to update the documentation is automatically created</li>
+</ol>
+<aside class="special"><p><strong>Key Point</strong>: The AI agent reads the code diff and autonomously decides and executes the appropriate documentation updates based on the changes. Even if developers forget to update the documentation, consistency between the code and documentation is always maintained.</p>
+</aside>
+<h2 is-upgraded>Step 4: Create Auto Healing DevOps (Optional)</h2>
+<p>If you have extra time, try creating an Agentic Workflow that detects CI/CD job failures and automatically fixes them. This is a <strong>CI error analysis</strong> use case.</p>
+<pre><code>Please create a GitHub Agentic Workflow by referencing the following URL.
+https://github.com/github/gh-aw/blob/main/create.md
+
+The purpose of the workflow is as follows:
+Detect failed workflow runs in the repository, analyze the cause, and automatically create an issue.
+Automatically assign Copilot to the created issue.
+</code></pre>
+<p>Once the workflow has been created, intentionally cause the build to fail and verify that it works:</p>
+<pre><code>Change System.out.println(&#34;Hello World!&#34;); to System.out.println(&#34;Hell World!&#34;); and push the change.
+</code></pre>
+<p>After the push, verify that GitHub Actions detects the workflow failure and that Copilot automatically creates and is assigned to an issue.</p>
+<aside class="special"><p><strong>Possibilities of Agentic Workflows</strong>: The automatic documentation updates and CI error analysis you experienced are just a few examples of Agentic Workflows. AI agents can be used throughout the development process for tasks such as issue triage, PR reviews, release note generation, and security scan automation.</p>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Congratulations 🎉" duration="5">
+        <h2 is-upgraded>What You Learned Today</h2>
+<p>In this workshop, you learned the following:</p>
+<ol type="1">
+<li><strong>Basic operations of GitHub Copilot CLI</strong> — Using an AI assistant in the terminal</li>
+<li><strong>Web application development using the Copilot SDK</strong> — Building an SDK-based AI chat tool with a single prompt</li>
+<li><strong>Code reviews with multiple models</strong> — Multi-perspective code quality checks using Claude, GPT, and Gemini</li>
+<li><strong>Agentic Workflows</strong> — Building a mechanism in which AI agents autonomously automate the development process on GitHub Actions</li>
+</ol>
+<h2 is-upgraded>Next Steps</h2>
+<ul>
+<li>Try using Copilot CLI in your actual projects</li>
+<li>Incorporate <code>/review</code> into your daily code review workflow</li>
+<li>Introduce Agentic Workflows into your organization&#39;s CI/CD pipeline</li>
+<li>Keep up with Copilot&#39;s new features</li>
+</ul>
+<h2 is-upgraded>Resources</h2>
+<ul>
+<li><a href="https://docs.github.com/copilot" target="_blank">GitHub Copilot Documentation</a></li>
+<li><a href="https://docs.github.com/copilot/using-github-copilot/best-practices-for-using-github-copilot" target="_blank">GitHub Copilot Best Practices</a></li>
+<li><a href="https://docs.github.com/copilot/github-copilot-in-the-cli" target="_blank">GitHub Copilot CLI</a></li>
+</ul>
+<p>Thank you for your hard work!</p>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/claat-public/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/prettify.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
+</body>
+</html>

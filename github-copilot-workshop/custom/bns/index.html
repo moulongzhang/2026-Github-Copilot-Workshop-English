@@ -1,0 +1,282 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>Bandai Namco Studios GitHub Copilot Hands-on Workshop</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/claat-public/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="UA-49880327-14" ga4id=""></google-codelab-analytics>
+  <google-codelab codelab-gaid=""
+                  codelab-ga4id=""
+                  id="github-copilot-workshop"
+                  title="Bandai Namco Studios GitHub Copilot Hands-on Workshop"
+                  environment="web"
+                  feedback-link="https://example.com/feedback">
+    
+      <google-codelab-step label="About This Workshop" duration="5">
+        <p>Thank you to everyone at Bandai Namco Studios for joining us today. Welcome to this one-hour hands-on workshop presented directly by GitHub employees.</p>
+<p class="image-container"><img alt="GitHub Copilot Logo" src="../../img/dcd9c52ce37f5b19.png"></p>
+<p>Although our time is short, our goal is for you to <strong>get hands-on experience with GitHub Copilot</strong>. This workshop is designed to help even those who are not engineers in their day-to-day work develop a practical sense of how to work with AI.</p>
+<h2 is-upgraded>Today&#39;s Goals</h2>
+<ul>
+<li>Verify that VS Code, GitHub Copilot CLI, and Copilot App are working</li>
+<li>Understand how to reduce token usage and AI Credits</li>
+<li>Use <strong>Copilot App</strong> to move from &#34;research to requirements to planning to implementation&#34; while managing state in local files</li>
+<li>Select models based on the task (Opus 4.8 / Sonnet 4.6 / MAI-Code-1-Flash) and review costs</li>
+</ul>
+<h2 is-upgraded>Overall Flow</h2>
+<p><strong>Verify VS Code / Copilot App -&gt; Learn the basics of token optimization -&gt; Exercise: Develop a token-efficient task management tool (research -&gt; requirements -&gt; planning -&gt; implementation -&gt; cost review)</strong></p>
+<p>We will use <strong>GitHub Copilot App</strong> throughout the workshop.</p>
+<aside class="special"><p> Today&#39;s main exercise centers on <strong>GitHub Copilot App</strong>. Even in environments where issue-driven development using GitHub Issues / Pull Requests is unavailable, you can reproduce the same AI-driven development flow by treating <strong>local files as &#34;state&#34;</strong>, such as <code>research.md</code> / <code>spec.md</code> / <code>plan/</code>.</p>
+</aside>
+<h2 is-upgraded>Prerequisites</h2>
+<ul>
+<li>GitHub Copilot Business license (876 Enterprise / GitHub EMU account)</li>
+<li>Windows or macOS</li>
+<li>Visual Studio Code (Agents Window) or GitHub Copilot App</li>
+<li>Ability to use GitHub Copilot CLI in your project working folder</li>
+</ul>
+<aside class="special"><p> We assume that you have completed 876 Enterprise user account authentication and app setup according to the distributed &#34;Event Preparation Guide.&#34; Please let us know if you have not completed these steps.</p>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Verify VS Code / Copilot App" duration="5">
+        <p>Today&#39;s main exercise centers on <strong>GitHub Copilot App</strong>. Starting from Copilot App, let&#39;s open the target folder and verify that everything works through VS Code and Terminal (Copilot CLI).</p>
+<h2 is-upgraded>1. Verify Copilot App Launch</h2>
+<p>Launch Copilot App. If menus such as model selection, session management, and Autopilot appear, the app has launched successfully.</p>
+<h2 is-upgraded>2. Open the Target Folder</h2>
+<p>Click the session <strong>&#34;+&#34;</strong>, then select and open your project working folder from <strong>Local folder or repository</strong>.</p>
+<h2 is-upgraded>3. Verify a Response in the Session</h2>
+<p>Open a session with the <strong>&#34;+&#34; button</strong> to the right of the folder you opened, then enter the following in the input field and verify that you receive a response.</p>
+<pre><code>hoge
+</code></pre>
+<p>If you receive any response, Copilot App is working correctly.</p>
+<h2 is-upgraded>4. Verify Access to VS Code</h2>
+<p>Launch VS Code from the <strong>upper-right corner of the Copilot App screen</strong>, then verify that you can access GitHub Copilot (that Copilot is enabled).</p>
+<h2 is-upgraded>5. Verify Copilot CLI Launch</h2>
+<p>Launch Terminal from the <strong>upper-right corner of the Copilot App screen</strong>, then enter the following to verify that Copilot CLI starts.</p>
+<pre><code language="language-bash" class="language-bash">copilot
+</code></pre>
+<p>If the interactive interface appears, it has started successfully. You can also use <code>/user</code> to verify the account currently signed in (and confirm that it is an 876 Enterprise user).</p>
+<aside class="warning"><p> If any component does not launch, verify that you are signed in with your GitHub EMU account (876 Enterprise). In the CLI, you can reauthenticate with <code>/login</code> or switch accounts with <code>/logout</code>.</p>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Reference: Tips for Reducing Token Usage / AI Credits" duration="10">
+        <p>Copilot Business uses AI Credits (UBB: usage-based billing). Before starting the next exercise, review these key points for <strong>improving quality while reducing consumption</strong>. The following is a summary of GitHub&#39;s &#34;Agent Quality and Token Optimization&#34; webinar.</p>
+<h2 is-upgraded>1. Choose a Model That Is &#34;Sufficient for the Task&#34;</h2>
+<ul>
+<li>Tasks requiring advanced reasoning, such as planning, design, and debugging: Opus / GPT-5.5 family</li>
+<li>Standard implementation: Sonnet / GPT-5.4 family</li>
+<li>Small refactors, repetitive tasks, and documentation updates: Haiku / mini family</li>
+<li>When in doubt, use <strong>Auto Mode</strong> as your default</li>
+</ul>
+<h2 is-upgraded>2. Do Not Overload the Context</h2>
+<ul>
+<li>Do not fill the context just because space is available. Models emphasize the beginning and end, while <strong>the middle is more easily overlooked</strong> (Context Rot)</li>
+<li>Use <code>/clear</code> for new tasks, and use <code>/compact</code> carefully for long sessions</li>
+<li>Provide only the necessary context and leave out unnecessary information</li>
+</ul>
+<h2 is-upgraded>3. Remove Ambiguity from Prompts</h2>
+<ul>
+<li>Give specific instructions and include the background and rationale</li>
+<li>State <strong>stop conditions</strong>, such as &#34;stop if X occurs&#34;</li>
+<li>Separate work into research, planning, and implementation (the next exercise follows exactly this pattern)</li>
+</ul>
+<h2 is-upgraded>4. Add Mechanisms That Reduce Failures</h2>
+<ul>
+<li>Agent failures compound in later steps. Add deterministic guardrails such as tests, linters, and scans</li>
+<li>Record recurring mistakes in a concise <code>copilot-instructions.md</code></li>
+</ul>
+<h2 is-upgraded>Reference Links</h2>
+<ul>
+<li><a href="https://docs.github.com/en/copilot/reference/copilot-billing/models-and-pricing" target="_blank">Copilot models and billing</a></li>
+<li><a href="https://artificialanalysis.ai/models?intelligence-index-cost=intelligence-index-cost" target="_blank">Model comparison (Artificial Analysis)</a></li>
+<li><a href="https://www.producttalk.org/context-rot/" target="_blank">What is Context Rot?</a></li>
+<li><a href="https://ashy-dune-0b4215a0f.7.azurestaticapps.net/detailed/index.html#/scenarios" target="_blank">Token optimization tips by scenario</a></li>
+<li><a href="https://github.ondemand.goldcast.io/on-demand/04d8b78c-7149-48df-91a1-68029e126c4a?utm_medium=email&utm_source=ent&utm_campaign=701Kg000000Pj6vIAC" target="_blank">Token optimization webinar (recording)</a></li>
+<li><a href="https://github.com/rtk-ai/rtk" target="_blank">Example tool for reducing shell output: rtk</a></li>
+<li><a href="https://github.com/jsturtevant/copilot-codeact-plugin" target="_blank">Copilot CodeAct Plugin for combining multiple tool calls</a></li>
+</ul>
+<aside class="special"><p> For recommendations based on your actual usage, run <code>/chronicle cost-tips</code> in Copilot App / CLI (we will use it in the final exercise). In short: &#34;<strong>choose the right model x avoid unnecessary context x divide the work</strong>.&#34; In the next exercise, you will experience this in a real development flow.</p>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Exercise: Develop a Token-Efficient Task Management Tool" duration="3">
+        <p>This is where today&#39;s exercise begins. Using <strong>GitHub Copilot App</strong>, you will build a small CLI task management tool in the order &#34;research -&gt; requirements -&gt; planning -&gt; implementation&#34; while <strong>optimizing token usage</strong>.</p>
+<h2 is-upgraded>Why &#34;Manage State Locally&#34;?</h2>
+<p>Issue-driven development based on GitHub Issues / Pull Requests is powerful, but it may be <strong>unavailable</strong> due to internal policies or repository permissions. In this exercise, you will instead save each phase&#39;s deliverables as <strong>local files</strong>, as shown below, and treat those files themselves as development &#34;state.&#34;</p>
+<pre><code>your-project/
+├── research.md      ← Phase 1: Research results
+├── spec.md          ← Phase 2: Implementation requirements
+└── plan/
+    ├── task.md      ← Phase 3: Major task
+    ├── 1.md         ← Small task (implementation order)
+    ├── 2.md
+    └── 3.md
+</code></pre>
+<aside class="special"><p> The key is <strong>one phase = one session</strong>. When a phase ends, save its deliverables to files, then reset the context with <code>/clear</code> (or open a new session) before moving on. This keeps the context clean, reduces token consumption, and makes each phase&#39;s responsibility clear.</p>
+</aside>
+<h2 is-upgraded>What You&#39;ll Build</h2>
+<p>You will build a <strong>simple CLI task management tool</strong> with almost no dependencies. It is a small application that can add, list, complete, and delete tasks, with data stored in a local JSON file. By keeping the project small, you can focus on <strong>how you build rather than what you build</strong>.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Phase 1: Research (research.md)" duration="8">
+        <p>Perform the initial research phase with <strong>Copilot CLI</strong>. Open Terminal from the <strong>upper-right corner of the Copilot App screen</strong>, then launch the CLI with <code>copilot</code>.</p>
+<pre><code language="language-bash" class="language-bash">copilot
+</code></pre>
+<p>After it starts, use <code>/model</code> to select <strong>Claude Opus 4.8</strong>. This phase uses its advanced reasoning capabilities to establish a foundation for research and design.</p>
+<pre><code>/model
+</code></pre>
+<p>Next, request research with the <code>/research</code> command. <code>/research</code> is a dedicated command that investigates sources across the web and codebase and summarizes its findings.</p>
+<pre><code>/research I want to build a CLI task management tool with minimal dependencies. Compare the advantages and disadvantages of implementing it using only the standard libraries of Python and Node.js, including how each handles file storage (JSON) and parses CLI arguments. Do not implement it yet.
+</code></pre>
+<p>When the research results are returned, <strong>review them in VS Code</strong>. If you are satisfied with the content, ask the CLI to save it.</p>
+<pre><code>Save the current research results to research.md.
+</code></pre>
+<p>After saving, this phase is complete. Clear the session to reset its state.</p>
+<pre><code>/clear
+</code></pre>
+<aside class="special"><p> Clearing the session here is important. By not carrying the context from the completed &#34;research&#34; role into the next phase, you can begin the requirements phase with a clean state.</p>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Phase 2: Requirements Definition (spec.md)" duration="8">
+        <p>Open a new session and use <code>research.md</code> to compile the implementation requirements. Request requirements creation, validation, and saving in <strong>a single prompt</strong>.</p>
+<p><code>/rubber-duck</code> is a dedicated validation command that identifies logical gaps, omissions, and design inconsistencies that the original author may not notice.</p>
+<pre><code language="language-text" class="language-text">Read @research.md and create the implementation requirements (spec) for the CLI task management tool. Clearly specify the target users, functional requirements (add, list, complete, and delete), data format, CLI command specifications, non-functional requirements, and out of scope items (what will not be implemented). Validate the requirements with /rubber-duck, incorporate the findings, and save the result to spec.md.
+</code></pre>
+<p>After saving, <strong>open a new session</strong> and proceed to the next phase.</p>
+<aside class="special"><p><strong>rubber-duck tip</strong>: Adding &#34;review it rigorously&#34; produces more in-depth feedback. It is also important to use your own judgment rather than accepting every suggestion without question.</p>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Phase 3: Planning (plan/ Directory)" duration="7">
+        <p>Open another new session and create an implementation plan based on the research and requirements. Request plan creation and <code>/rubber-duck</code> validation in <strong>a single prompt</strong>.</p>
+<pre><code language="language-text" class="language-text">Create an implementation plan for the CLI task management tool based on @research.md and @spec.md.
+
+- Break the work down into major tasks and small tasks
+- Determine the implementation order
+- Clearly state the blockers (dependencies and prerequisites) for each task
+- Clearly state the test success and failure conditions for each task
+
+Save the deliverables in the plan/ directory. Save the major task in plan/task.md. Create one file for each small task, using an implementation-order index and a descriptive filename that indicates what the plan covers, such as plan/1.[descriptive-plan-name].md, plan/2.[descriptive-plan-name].md, plan/3.[descriptive-plan-name].md, and so on.
+
+Finally, validate the plan you created with /rubber-duck.
+</code></pre>
+<p>After saving, <strong>open a new session</strong> and proceed to the next phase.</p>
+<aside class="warning"><p> The quality of the planning phase largely determines the success or failure of the implementation phase. Before moving on, always verify in VS Code that each small task clearly states its test &#34;success conditions and failure conditions.&#34;</p>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Phase 4: Implementation (Autopilot &#43; Subsessions)" duration="10">
+        <p>Now it is time to implement. Open a new session in Copilot App, switch the model to <strong>Claude Sonnet 4.6</strong>, and enable <strong>Autopilot mode</strong> (in Autopilot, file creation, editing, and command execution proceed autonomously without confirmation).</p>
+<p>Request the complete implementation according to the plan as follows.</p>
+<pre><code language="language-text" class="language-text">Implement the CLI task management tool according to @plan/task.md and the small tasks under @plan/ (1.md, 2.md, ...).
+
+Implement each small task in a sub-session using the MAI-Code-1-Flash model. Follow the implementation order and continue until all tasks are complete, verifying that each task meets its test success conditions.
+</code></pre>
+<aside class="special"><p><strong>If you want to try a local LLM</strong>, specify a BYOK model through LiteLLM for the sub-session execution.</p>
+</aside>
+<p>The key here is <strong>separation of responsibilities</strong>.</p>
+<ul>
+<li><strong>Parent session (Sonnet 4.6 / Autopilot)</strong>: Oversees the overall plan and manages task progress</li>
+<li><strong>Subsessions (MAI-Code-1-Flash or BYOK model through LiteLLM)</strong>: Implement individual small tasks quickly and at low cost</li>
+</ul>
+<aside class="special"><p> By assigning the lightweight and fast MAI-Code-1-Flash (or your local BYOK model) to small tasks as the &#34;implementation hands,&#34; while using the more capable Sonnet 4.6 as the &#34;orchestrator,&#34; you can <strong>balance speed, cost, and quality</strong>. This is a practical example of selecting models based on their purpose.</p>
+</aside>
+<p>While implementation is in progress, watch the files change in VS Code. Seeing each task in <code>plan/</code> completed one by one gives you a direct sense of the local &#34;state&#34; moving forward.</p>
+<p>If you get stuck, try the following:</p>
+<ul>
+<li>Paste the error message as-is and say, &#34;Fix this&#34;</li>
+<li>Rerun only the unsuccessful small task with a different model</li>
+<li>Review the test conditions for the relevant task in <code>plan/</code></li>
+</ul>
+<h2 is-upgraded>Verify Functionality</h2>
+<p>After all tasks are complete, launch the application and verify its behavior.</p>
+<pre><code language="language-text" class="language-text">Launch the implemented CLI task management tool and verify that adding, listing, completing, and deleting tasks all work correctly. Fix anything that does not work.
+</code></pre>
+<p>Try running the commands yourself in the terminal and verify that the data is saved to a local file and persists after restarting. This will give you a stronger sense of what it means to &#34;manage state locally.&#34;</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Phase 5: Review Costs" duration="4">
+        <p>After reaching a stopping point in implementation, review <strong>how many tokens this exercise consumed and how much it cost</strong>. Copilot session history is recorded in <code>~/.copilot/data.db</code>, so let&#39;s ask Copilot itself to aggregate the data.</p>
+<p>In the session you used for implementation, make the following request (replace <code>[your project]</code> with the name of your working folder).</p>
+<pre><code language="language-text" class="language-text">Refer to the session table in ~/.copilot/data.db, measure the number of tokens used across all sessions for [your project], and calculate the cost according to the pricing table.
+https://docs.github.com/en/copilot/reference/copilot-billing/models-and-pricing
+</code></pre>
+<p>The token count and estimated cost for each model will be displayed. Review how dividing the work into sessions by phase affected context consumption.</p>
+<h2 is-upgraded>Next Step: /chronicle cost-tips</h2>
+<p>Finally, run <code>/chronicle cost-tips</code> to review a collection of cost optimization tips.</p>
+<pre><code language="language-text" class="language-text">/chronicle cost-tips
+</code></pre>
+<p>Compare the displayed tips with this exercise&#39;s aggregated results and your practice of separating sessions by phase to identify exactly where you saved tokens.</p>
+<aside class="special"><p><strong>What You Learned in This Exercise</strong>: By <strong>separating &#34;research -&gt; requirements -&gt; planning -&gt; implementation&#34; into phase-specific sessions and saving deliverables to local files</strong>, you can manage state and proceed with AI-driven development even in environments where issue-driven development is unavailable. Model selection (Opus 4.8 for design, Sonnet 4.6 for orchestration, and MAI-Code-1-Flash / BYOK for implementation) and validation with rubber-duck help balance quality and cost.</p>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Congratulations 🎉" duration="5">
+        <p>Thank you for your hard work during this one-hour workshop. Today, you experienced the following:</p>
+<ol type="1">
+<li>Basic Copilot App / CLI operations and the principles of token optimization</li>
+<li>Research with <code>/research</code> and saving the results to research.md</li>
+<li>Requirements definition (spec.md) and planning (plan/) with <code>/rubber-duck</code> validation</li>
+<li>Implementation using Autopilot + subsessions (MAI-Code-1-Flash / BYOK)</li>
+<li>Token and cost review using <code>~/.copilot/data.db</code> and <code>/chronicle cost-tips</code></li>
+</ol>
+<p>Through these activities, you experienced a flow for <strong>using local files as &#34;state&#34; in spec-driven development</strong>, even in environments where issue-driven development is unavailable.</p>
+<h2 is-upgraded>Trial License Program</h2>
+<p>For participants who do not have an 876 Enterprise Copilot license, we offer a <strong>limited-time GitHub Copilot Business trial (3,000 AI Credits)</strong>. Licenses are automatically granted through a web form, and capacity will be expanded gradually on a first-come, first-served basis. Please complete today&#39;s exercise and respond to the follow-up survey at a later date.</p>
+<h2 is-upgraded>Resources</h2>
+<ul>
+<li><a href="https://docs.github.com/copilot" target="_blank">GitHub Copilot Documentation</a></li>
+<li><a href="https://docs.github.com/copilot/using-github-copilot/best-practices-for-using-github-copilot" target="_blank">GitHub Copilot Best Practices</a></li>
+</ul>
+<p>Please ask us anything during the Q&amp;A session (17:45-17:55). Thank you!</p>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/claat-public/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/prettify.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
+</body>
+</html>

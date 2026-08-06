@@ -39,14 +39,13 @@ First, open the project URL above in your browser and create your own repository
 1. Open the project URL (https://github.com/moulongzhang/2026-Github-Copilot-Workshop-Python) in your browser
 2. Click the **Use this template** button in the upper right and select **Create a new repository**
 
-![Click Use this template button](github-copilot-workshop/img/use-template1.png)
+![Click Use this template button](github-copilot-workshop/img/f30b349b9da9c209.png)
 
 3. On the repository creation screen, enter a repository name and click the **Create repository** button
 
-![Click Create repository button](github-copilot-workshop/img/use-template2.png)
+![Click Create repository button](github-copilot-workshop/img/9b42f25710076003.png)
 
 > aside negative
->
 > **⚠️ Important**: When creating the repository, make sure to select **"Public"** for the **Visibility** setting. Some Copilot features and GitHub Actions may not work correctly with private repositories.
 
 Once the template creation is complete, a new repository will be created under your GitHub account.
@@ -62,13 +61,6 @@ Use the repository you created to set up a development environment with GitHub C
 
 ![Codespaces Setup](github-copilot-workshop/img/github-codespaces.png)
 
-> aside positive
->
-> **Tip**: Using Codespaces launches a VS Code-like environment in your browser, allowing you to start development immediately. This project includes a `.devcontainer/devcontainer.json` file that automatically configures the following when Codespaces starts:
-> - **Python 3.11 environment**: The Python environment needed for development
-> - **GitHub Copilot extension**: AI-powered code completion and chat features
-> - **CodeTour extension**: Guided tour functionality for the project
-
 ## Let's Build a Pomodoro Timer
 Duration: 30
 
@@ -78,7 +70,7 @@ In this hands-on session, we will develop a Pomodoro timer application. This app
 
 We aim to create an application with a UI like the one below.
 
-![Pomodoro Timer UI](github-copilot-workshop/img/pomodoro.png)
+![Pomodoro Timer UI](github-copilot-workshop/img/8e24c2d7e6a91e1b.png)
 
 First, let's create a new Python file in VS Code. Since we want to create this as a web application, we'll use Flask. Let's name the main file "app.py".
 
@@ -87,6 +79,7 @@ First, let's create a new Python file in VS Code. Since we want to create this a
 We will create a web timer application for the Pomodoro Technique.
 
 ### Required Features
+
 - 25-minute work timer
 - 5-minute break timer
 - Start, stop, and reset the timer
@@ -95,7 +88,6 @@ We will create a web timer application for the Pomodoro Technique.
 - Responsive Web UI
 
 > aside positive
->
 > **What is a Pomodoro Timer?**: The Pomodoro Technique is a time management method devised by Francesco Cirillo in the 1980s. It involves working in sets of "25 minutes of work + 5 minutes of break" (= 1 Pomodoro), repeating this cycle to maintain focus and work efficiently. For more details, see [Wikipedia: Pomodoro Technique](https://en.wikipedia.org/wiki/Pomodoro_Technique).
 
 ## Thinking Through the Pomodoro Timer Design
@@ -107,13 +99,9 @@ Rather than jumping straight into implementation, let's first consult Copilot ab
 
 Select "Agent" from the Copilot Chat mode selector. The agent understands user intent and can execute tasks more autonomously.
 
-<div align="center">
-  <img src="github-copilot-workshop/img/agent_mode2.png" alt="Agent Mode Selection 2" width="600" />
-  
-  <div style="height: 24;"></div>
-  
-  <img src="github-copilot-workshop/img/agent_mode.png" alt="Agent Mode Selection" width="600" />
-</div>
+![Agent Mode Selection 2](github-copilot-workshop/img/bcc926772d6a58dd.png)
+
+![Agent Mode Selection](github-copilot-workshop/img/428f81215165ebb9.png)
 
 ### Design Consultation
 
@@ -121,11 +109,11 @@ When creating a web application with a UI like this, a useful feature is the abi
 
 First, save the UI image from the previous page as `pomodoro.png` in the project root. Then click `Add Context` in the chat input area and select "Image from Clipboard" or "Files & Folders...". Then select the UI image.
 
-![VS Code Copilot Chat Context Menu](github-copilot-workshop/img/add_context2.png)
+![VS Code Copilot Chat Context Menu](github-copilot-workshop/img/32ba4d287403b2f9.png)
 
-![VS Code Copilot Chat Context Menu](github-copilot-workshop/img/add_context3.png)
+![VS Code Copilot Chat Context Menu](github-copilot-workshop/img/aadb91ba110fa522.png)
 
-Once the image is uploaded, it will appear in the Copilot Chat window.
+Once the image is uploaded, it will appear in Copilot Chat.
 
 Now, try entering the following prompt.
 
@@ -148,10 +136,7 @@ The architecture has been finalized through our conversation so far. Based on ou
 ```
 
 > aside positive
->
-> When you reach a good stopping point in your Copilot Chat conversation, starting a new conversation allows you to give Copilot clearer instructions. To start a new conversation, click the "New Conversation" button at the top of the chat window. When doing so, it's helpful to save content you want to reference in future chats — like this architecture document — to a file, as we did here.
-
-
+> When you reach a good stopping point in your Copilot Chat conversation, starting a new conversation allows you to give Copilot clearer instructions. To start a new conversation, click the "New Conversation" button at the top of the chat window. When doing so, it's helpful to save content you want to reference in future chats - like this architecture document - to a file, as we did here.
 
 ## Let's Identify What Needs to Be Done
 Duration: 10
@@ -162,9 +147,9 @@ At this point, the UI mock and architecture design are finalized. Let's consider
 Please identify all the features that need to be implemented to create this Pomodoro timer application.
 ```
 
-<img src="github-copilot-workshop/img/pomodoro.png" alt="Feature List Review" width="400" />
+![Feature List Review](github-copilot-workshop/img/8e24c2d7e6a91e1b.png)
 
-![Feature Identification Example](github-copilot-workshop/img/10-2.list_features.png)
+![Feature Identification Example](github-copilot-workshop/img/20a6ec3e5b2f7c50.png)
 
 Refine this content through your conversation with Copilot. Once finalized, save this content to a file called features.md, just as we did with the architecture.
 
@@ -221,7 +206,7 @@ Please implement Step 1 of plan.md. If any existing files in this project need t
 
 In my case, Copilot came back with questions that needed consideration, as shown below. In such cases, provide the necessary information.
 
-![Example Question from Copilot](github-copilot-workshop/img/12-0.question_from_copilot.png)
+![Example Question from Copilot](github-copilot-workshop/img/8254991301cd47cd.png)
 
 After that, Copilot proceeds with the Step 1 implementation. Once implementation is complete, Copilot will autonomously build the project and check for errors. If errors occur, it will make additional fixes to resolve them. This autonomous behavior is a key characteristic of Agent Mode.
 
@@ -233,11 +218,7 @@ Once implementation is complete, verify the following:
 
 Below is an example of my Step 1 implementation result. The state of your application at this stage will likely differ.
 
-
-![Step 1 Implementation Result Example](github-copilot-workshop/img/12-1.completed_timer.png)
-
-
-
+![Step 1 Implementation Result Example](github-copilot-workshop/img/99241f822533e37a.png)
 
 ## Let's Write Tests
 Duration: 20
@@ -256,15 +237,14 @@ There are currently no unit tests for the existing implementation. Please implem
 
 Copilot's agent will then ask for permission to execute commands to install unit test dependencies. Like this, the agent always asks the user for confirmation before executing any command. Click "Continue" to allow it to run the necessary commands.
 
-![Copilot Test Implementation Confirmation](github-copilot-workshop/img/13-0.test_for_step1.png)
+![Copilot Test Implementation Confirmation](github-copilot-workshop/img/c724e1c653e2c6b3.png)
 
 Copilot will then execute the command in VS Code's terminal and install the required dependencies. Similarly, for all subsequent commands, the agent will always ask the user for confirmation before execution. If an error occurs from running a command, the agent will make additional fixes to resolve it.
-
 
 ## Configuration for the Next Tasks
 Duration: 20
 
-In the following steps, we will use Copilot features on GitHub.com and the Coding Agent. Let's configure the necessary settings.
+In the following steps, we will use Copilot features on GitHub.com and the Cloud Agent. Let's configure the necessary settings.
 
 ### 1. GitHub Advanced Security (GHAS) Configuration
 
@@ -289,7 +269,7 @@ This will enable automatic code scanning on push and pull request creation.
 Let's enable the Copilot features available on GitHub.
 
 1. Click your profile icon in the upper right of GitHub
-2. Select **Your Copilot**
+2. Select **Copilot settings**
 
 ![Copilot Settings](github-copilot-workshop/img/copilot-settings.png)
 
@@ -298,11 +278,11 @@ Enable the following features:
 - **Editor preview features** - Preview features for the editor
 - **Copilot CLI** - Use Copilot in the terminal
 - **Copilot code review** - Code review feature
-- **Copilot coding agent** - Autonomous coding agent
+- **Copilot Cloud Agent** - Autonomous coding agent
 
 > aside negative
 >
-> **Plan Limitations**: Advanced features such as Copilot Code Review, Coding Agent, and Copilot CLI are only available with GitHub Copilot Business/Enterprise plans. These features are not available on the Free plan.
+> **Plan Limitations**: Advanced features such as Copilot Code Review, Cloud Agent, and Copilot CLI are only available with GitHub Copilot Business/Enterprise plans. These features are not available on the Free plan.
 
 ### 3. Enable Issues and Actions in Your Repository
 
@@ -323,7 +303,7 @@ Repositories created from templates may have Issues and Actions disabled by defa
 
 ### 4. Creating a Personal Access Token (PAT) (Optional)
 
-Create a Personal Access Token so that the Coding Agent can operate within GitHub Actions.
+Create a Personal Access Token so that the Cloud Agent can operate within GitHub Actions.
 
 #### Step 1: Create a Fine-grained PAT
 
@@ -357,7 +337,7 @@ Set the created PAT as a repository secret:
 
 #### Step 3: Verify Workflow Permissions
 
-Verify the Actions workflow permissions so the Coding Agent can automatically create Pull Requests:
+Verify the Actions workflow permissions so the Cloud Agent can automatically create Pull Requests:
 
 1. Click the **Settings** tab in your repository
 2. Select **Actions** → **General** from the left sidebar
@@ -366,7 +346,7 @@ Verify the Actions workflow permissions so the Coding Agent can automatically cr
 
 > aside positive
 >
-> **Tip**: This setting allows the Copilot Coding Agent to use Copilot's capabilities within GitHub Actions workflows.
+> **Tip**: This setting allows the Copilot Cloud Agent to use Copilot's capabilities within GitHub Actions workflows.
 
 ## Implement the Remaining Features (Optional)
 Duration: 20
@@ -531,10 +511,10 @@ The Pull Request also displays results from GitHub Advanced Security (GHAS) stat
 >
 > **Leveraging Copilot Autofix**: GitHub provides Copilot Autofix automatic fix suggestions for detected security vulnerabilities. This allows you to quickly resolve security issues.
 
-## [GitHub.com] Copilot Coding Agent
+## [GitHub.com] Copilot Cloud Agent
 Duration: 20
 
-Let's use the GitHub Copilot web interface to automatically generate improvement proposals as Issues and leverage the Coding Agent.
+Let's use the GitHub Copilot web interface to automatically generate improvement proposals as Issues and leverage the Cloud Agent.
 
 ### Auto-creating Issues with GitHub Copilot
 
@@ -571,18 +551,18 @@ Test purpose: Measure the impact of gamification elements on motivation and cont
 
 ![Creating Issues with GitHub Copilot](github-copilot-workshop/img/github-copilot-issue-creation.png)
 
-### Creating Issues and Assigning the Coding Agent
+### Creating Issues and Assigning the Cloud Agent
 
 1. **Copilot will automatically generate 3 Issues**
 2. Review the content of each Issue and edit as needed
 3. Click the **Create** button to create each Issue
-4. After navigating to the Issue page, select **Copilot** in the **Assignees** section to assign the Coding Agent
+4. After navigating to the Issue page, select **Copilot** in the **Assignees** section to assign the Cloud Agent
 
-![Assigning Coding Agent to Issue](github-copilot-workshop/img/coding-agent-assignment.png)
+![Assigning Cloud Agent to Issue](github-copilot-workshop/img/coding-agent-assignment.png)
 
 ### Expected Pull Request Results
 
-Once the Coding Agent is assigned, you can expect the following results:
+Once the Cloud Agent is assigned, you can expect the following results:
 
 - **Automatic code implementation**: Feature implementation based on each Issue's requirements
 - **Pull Request creation**: Automatic PR creation after implementation is complete
@@ -602,7 +582,7 @@ Once the Coding Agent is assigned, you can expect the following results:
 
 > aside positive
 >
-> **Leveraging MCP Server**: The GitHub MCP Server and Playwright MCP Server are included in the Coding Agent's initial setup. This enables not only unit tests but also automated UI verification through screenshots. The Coding Agent visually verifies that implemented features work as expected, delivering higher quality code.
+> **Leveraging MCP Server**: The GitHub MCP Server and Playwright MCP Server are included in the Cloud Agent's initial setup. This enables not only unit tests but also automated UI verification through screenshots. The Cloud Agent visually verifies that implemented features work as expected, delivering higher quality code.
 
 ## [GitHub.com] Agentic Workflow
 Duration: 15
@@ -657,166 +637,85 @@ https://github.com/github/gh-aw/blob/main/create.md
 The purpose of the workflow is as follows:
 - It runs when code under copilotWebRelay is updated
 - It updates the documentation under copilotWebRelay/docs based on the code under copilotWebRelay, ensuring that source code and documentation are always in sync
+
+Commit the workflow file you created and create a Pull Request.
 ```
 
 > aside positive
 >
 > **Possibilities of Agentic Workflows**: Beyond documentation updates, you can build Agentic Workflows for various tasks such as automatic test generation, automated code reviews, and release note creation.
 
-## Let's Build the Copilot Web Relay
+## Let's Build an AI Chat Tool with the Copilot SDK
 Duration: 10
 
-From here, as an advanced section, we will build the **Copilot Web Relay** — a web application that allows you to access GitHub Copilot CLI from a browser.
+From here, you'll use the **Copilot SDK** to build **Copilot Web Relay**, a generative AI chat tool that runs in the browser, **with a single prompt from Copilot CLI**.
 
-In this section, we take a different approach from the Pomodoro timer. We will experience a workflow of **loading pre-prepared design documents into Copilot and implementing step by step through an interactive dialogue based on those documents**.
+### What is the Copilot SDK?
 
-![Copilot Web Relay](github-copilot-workshop/img/copilot-web-relay.png)
+The **Copilot SDK** is an SDK for programmatically controlling GitHub Copilot CLI. It communicates with Copilot CLI via JSON-RPC, allowing you to integrate capabilities such as creating AI sessions, sending and receiving messages, and receiving streaming responses into your applications.
 
-### What is Copilot Web Relay?
+**SDK Repository**: [https://github.com/github/copilot-sdk](https://github.com/github/copilot-sdk)
 
-It is a web application that allows you to interact with your locally running GitHub Copilot CLI in real time through a browser UI, without directly operating the terminal.
+### What You'll Build
 
-### Architecture Overview
+You'll build a web application that lets you chat with AI in real time from your browser:
 
-| Component | Tech Stack | Role |
-|---|---|---|
-| **Browser** | React + TypeScript + Vite | Terminal display (xterm.js), session management |
-| **Backend Server** | Python (FastAPI) + WebSocket | Copilot CLI process management, WebSocket bridge |
-| **CLI Bridge** | Python (asyncio + pexpect) | Copilot CLI PTY (pseudo-terminal) control, I/O streaming |
+- **Frontend**: A browser-based chat UI (React + TypeScript)
+- **Backend**: A Node.js server that manages AI sessions using the Copilot SDK
+- **Real-time communication**: Delivers streaming responses over WebSocket
 
-Browser ↔ WebSocket (bidirectional communication) ↔ Backend Server ↔ PTY/stdin/stdout (subprocess management) ↔ Copilot CLI
+### Key Copilot SDK APIs
 
-### Development Approach
+| API | Description |
+|---|---|
+| `CopilotClient` | Client that manages the connection to the CLI server |
+| `client.createSession()` | Creates a new conversation session |
+| `session.send()` | Sends a message |
+| `session.on("assistant.message_delta")` | Receives streaming response chunks |
+| `session.on("assistant.message")` | Receives the final response |
+| `session.on("session.idle")` | Detects when session processing is complete |
+| `approveAll` | Automatically approves all tool execution permissions |
+| `createChatTools()` | Generates the standard toolset for chat |
+| `hooks.onPreToolUse` | Hook that runs before tool execution (used for input validation, transformation, and more) |
+| `hooks.onPostToolUse` | Hook that runs after tool execution (used for logging, processing results, and more) |
 
-In this section, we'll proceed as follows:
+### Basic SDK Usage
 
-1. **Review the design document** — Review the design document distributed with the project and understand the overall picture of the application
-2. **GitHub Copilot CLI** — Launch the CLI in the terminal and verify it works correctly
-3. **AI-driven development** — Leverage the design document and implement the web application through Vibe Coding while interacting with GitHub Copilot CLI
+```javascript
+import { CopilotClient, approveAll, createChatTools } from "@github/copilot-sdk";
 
-> aside positive
->
-> **Key Point of This Section**: The goal is to experience the quality and volume of tasks that can be achieved when combining Copilot's high-end models with GitHub Copilot's latest features. By preparing design documents in advance, you can clearly communicate the context of "what to build" to Copilot. In actual development workflows, leveraging design documents as Copilot context is a highly effective practice.
+const client = new CopilotClient();
+await client.start();
 
-## Reviewing the Design Document and GitHub Copilot CLI
-Duration: 15
+const session = await client.createSession({
+    model: "gpt-5",
+    onPermissionRequest: approveAll,
+    tools: createChatTools(),
+    hooks: {
+        onPreToolUse: (input, invocation) => {
+            console.log(`Before tool execution: ${invocation.toolName}`, input);
+        },
+        onPostToolUse: (input, invocation) => {
+            console.log(`After tool execution: ${invocation.toolName}`, input);
+        },
+    },
+});
 
-### 1. Reviewing the Design Document
+session.on("assistant.message_delta", (event) => {
+    process.stdout.write(event.data.deltaContent);
+});
 
-The design document for the Copilot Web Relay is distributed at `copilotWebRelay/planning.md` within the project. Start by opening this file to understand the overall picture of the application.
-
-The design document includes the following:
-
-- **Architecture**: Browser ↔ WebSocket ↔ FastAPI ↔ PTY ↔ Copilot CLI structure
-- **Component Structure**: Frontend (React/TS), Backend (FastAPI), CLI Bridge (pexpect)
-- **Feature Requirements**: Phase 1 (MVP) and Phase 2 (Enhanced Chat UI)
-- **WebSocket Protocol Design**: Message format and state management specifications
-- **Directory Structure**: File layout and the role of each file
-- **Implementation Task List**: Dependencies between tasks
-- **Important Implementation Notes**: Proactive measures for common pitfalls
-
-> aside positive
->
-> **Tips for Using the Design Document**: In the upcoming implementation phase, when sending prompts to GitHub Copilot CLI, adding the instruction `refer to planning.md` allows Copilot to generate code with full understanding of the design document context.
-
-### 2. Launching GitHub Copilot CLI
-
-Open the terminal in VS Code and enter the following command to launch GitHub Copilot CLI:
-
-```bash
-copilot
+await session.send({ prompt: "Hello!" });
 ```
 
-When it starts successfully, an interactive interface will appear. Type `/help` to see the available commands.
-
-> aside negative
->
-> **About GitHub Copilot CLI Setup**
-> Normally, using GitHub Copilot CLI requires installing **GitHub CLI (`gh`)** and setting up the Copilot extension. In this workshop, **the DevContainer configuration includes GitHub Copilot CLI installation and authentication**, so the `copilot` command is available immediately when you launch Codespaces.
->
-> To set up in your own environment, the following steps are required:
-> 1. Install GitHub CLI: `brew install gh` (macOS)
-> 2. Authenticate with GitHub CLI: `gh auth login`
-> 3. Install the Copilot extension: `gh extension install github/copilot-cli`
-
-### 3. GitHub Copilot CLI Command Reference
-
-In GitHub Copilot CLI, you can type natural language instructions as text or use slash commands starting with `/`.
-
-#### Code-related
-
-| Command | Description |
-|---|---|
-| `/ide` | Connect to the IDE workspace |
-| `/diff` | View change diffs in the current directory |
-| `/review` | Run the code review agent to analyze changes |
-| `/lsp` | Manage language server settings |
-| `/terminal-setup` | Terminal setup for multiline input (Shift+Enter / Ctrl+Enter) |
-
-#### Permissions
-
-| Command | Description |
-|---|---|
-| `/allow-all` | Enable all permissions (tools, paths, URLs) |
-| `/add-dir` | Add a permitted directory for file access |
-| `/list-dirs` | List permitted directories |
-| `/cwd` | Change or display the working directory |
-| `/reset-allowed-tools` | Reset the list of allowed tools |
-
-#### Session Management
-
-| Command | Description |
-|---|---|
-| `/resume` | Switch to another session (specify session ID) |
-| `/rename` | Rename the current session |
-| `/context` | Display token usage of the context window |
-| `/usage` | Display session usage metrics and statistics |
-| `/session` | Display session information and workspace summary |
-| `/compact` | Summarize conversation history to reduce context window usage |
-| `/share` | Export session as a Markdown file or GitHub Gist |
-
-#### Help & Feedback
-
-| Command | Description |
-|---|---|
-| `/help` | Display help for interactive commands |
-| `/changelog` | Display CLI version changelog |
-| `/feedback` | Send feedback about the CLI |
-| `/theme` | Check or set the terminal theme |
-| `/experimental` | Display available experimental features, toggle experimental mode |
-
-#### Others
-
-| Command | Description |
-|---|---|
-| `/model` | Select the AI model to use (GPT, Claude, Gemini, etc.) |
-| `/clear` , `/new` | Clear conversation history |
-| `/plan` | Create an implementation plan before coding |
-| `/instructions` | Display or toggle custom instruction files |
-| `/diagnose` | Analyze current session logs |
-| `/login` , `/logout` | Log in/out of Copilot |
-| `/user` | Manage GitHub users |
-| `/exit` , `/quit` | Exit the CLI |
-
-#### Custom Instruction Files
-
-Copilot CLI automatically loads custom instruction files from the following locations:
-
-- `CLAUDE.md` / `GEMINI.md` / `AGENTS.md` (git root and current directory)
-- `.github/instructions/**/*.instructions.md` (git root and current directory)
-- `.github/copilot-instructions.md`
-- `$HOME/.copilot/copilot-instructions.md`
-
 > aside positive
 >
-> **CLI Tip**: You can switch models using the `/model` command. If implementation isn't progressing well, trying a different model may yield better results. The `/plan` command lets you automatically generate an implementation plan before coding, which is particularly effective when combined with a design document.
+> **Key Point of This Section**: Without preparing a design document or detailed specifications, you'll build a web application using the SDK all at once simply by giving Copilot CLI **a single prompt**. Experience the productivity of AI-driven development.
 
 ## Implement with Vibe Coding
 Duration: 60
 
-Now that you've reviewed the design document and verified GitHub Copilot CLI is working, it's time to implement the Copilot Web Relay with **Vibe Coding**.
-
-Simply execute the following 4 steps in order, and Copilot will build the application based on the design document.
+Now that you understand the Copilot SDK overview, it's time to implement a browser-based AI chat tool with **Vibe Coding**.
 
 ### Step 1: Launch Copilot CLI
 
@@ -834,73 +733,134 @@ copilot
 
 `/allow-all` is a command that grants **all permissions at once for tool execution, file access, and external URL access** to Copilot CLI.
 
-Normally, Copilot CLI prompts the user for permission each time it performs file read/write operations, command execution, or external communication for security purposes. Running `/allow-all` skips these confirmation prompts, allowing Copilot to autonomously create/edit files, install packages, start servers, and more.
+Normally, Copilot CLI prompts the user for permission each time it reads or writes files, executes commands, or communicates externally for security purposes. Running `/allow-all` skips these confirmation prompts, allowing Copilot to autonomously create and edit files, install packages, start servers, and more.
 
 > aside negative
 >
-> **Note**: `/allow-all` is only effective for the current session. For security reasons, only use it with trusted projects. If you prefer to grant permissions individually, you can use `/add-dir` to set directory-level access permissions.
+> **Note**: `/allow-all` is only effective for the current session. For security reasons, only use it with trusted projects. If you prefer to grant permissions individually, you can also use `/add-dir` to set directory-level access permissions.
 
 ### Step 3: Select a High-end Model
 
 ```
-/model Claude Opus 4.6
+/model
 ```
 
-Select the most powerful model available. Copilot CLI lets you switch AI models with the `/model` command, allowing you to choose the optimal model based on task complexity. For building a web application with multiple components like this one, a high-end model with strong reasoning capabilities is most effective.
+From the list of models, select the most powerful model (for example, Claude Opus 4.6). A high-end model with strong reasoning capabilities is effective for building a web application with multiple components.
 
-### Step 4: Implement Everything at Once with Fleet Mode
+### Step 4: Switch to Autopilot Mode
+
+Press **Shift+Tab** to switch Copilot CLI to **Autopilot mode**. In Autopilot mode, Copilot autonomously creates and edits files and executes commands without asking for confirmation, making it ideal for Vibe Coding large implementations all at once.
+
+### Step 5: Implement Everything at Once with a Single Prompt
+
+Enter the following prompt in Copilot CLI. The `/fleet` command runs multiple agents in parallel to build a browser-based AI chat tool using the SDK all at once:
 
 ```
-/fleet Build Copilot Web Relay — a web application that allows accessing GitHub Copilot CLI from a browser. Please follow the plan in copilotWebRelay/planning.md for implementation. If anything is unclear, please ask me first.
+/fleet Using the Copilot SDK, build an AI chat web application that runs in a browser in the copilotWebRelay/ directory.
+
+SDK reference: https://github.com/github/copilot-sdk
+
+Requirements:
+- Backend: Node.js + Express + WebSocket server
+  - Manage sessions with the Copilot SDK's CopilotClient
+  - Use model "gpt-5" with createSession(), and use approveAll for onPermissionRequest
+  - Stream responses to the client over WebSocket with session.on("assistant.message_delta")
+  - Notify the client of completion with session.on("session.idle")
+- Frontend: React + TypeScript + Vite
+  - Modern chat UI (message input field, send button, and chat history display)
+  - Connect to the server with WebSocket and display streaming responses in real time
+  - Support Markdown rendering
+- Development environment: Backend and frontend can be started simultaneously with npm scripts
+- Verify that the application works
 ```
-
-`/fleet` is a command that **launches multiple sub-agents in parallel to divide and concurrently execute large tasks**.
-
-In normal Copilot CLI, tasks are processed one at a time sequentially, but with `/fleet`, Copilot automatically breaks down tasks and **progresses multiple work items simultaneously** — such as backend implementation, frontend implementation, and configuration file creation. This allows you to complete in a single instruction what previously required giving instructions one by one.
-
-In Fleet Mode, the following happens automatically:
-
-- **Task decomposition**: Reads the design document and identifies components to implement
-- **Parallel implementation**: Simultaneously implements Backend (FastAPI + CLI Bridge + WebSocket) and Frontend (React + xterm.js)
-- **Dependency resolution**: Package installation, configuration file generation
-- **Integration testing**: Verification after implementation
 
 > aside positive
 >
-> **Fleet Mode Tips**: If Copilot asks questions, respond appropriately. For content described in the design document, responding with "please refer to planning.md" is also effective. Implementation progress is displayed in real time in the terminal.
+> **Single-Prompt Tip**: Structure the requirements as a bulleted list and clearly specify the technology stack, SDK APIs, and expected behavior so Copilot can build the application accurately.
 
 ### Hints If You Get Stuck
 
-If errors occur during Fleet Mode implementation, try the following:
+If errors occur during implementation, try the following:
 
-- **Share the error message directly with Copilot**: Simply saying "please fix this error" is often enough
+- **Share the error message directly with Copilot**: Simply saying "Please fix this error" is often enough
 - **Check changes with `/diff`**: Verify there are no unintended changes
 - **Switch models with `/model`**: Try a different model and retry
-- **Review the design document notes**: The "Important Implementation Notes" section in `planning.md` contains solutions for common bugs
 
 > aside negative
 >
 > **Common Pitfalls**:
+> - **Installing the Copilot SDK**: Make sure `npm install @github/copilot-sdk` runs successfully
+> - **Authentication**: Make sure Copilot CLI is signed in (the `copilot` command works)
 > - **Vite WebSocket proxy**: You need to specify `http://` instead of `ws://` for the `target`
 > - **React StrictMode**: `useEffect` running twice can cause unstable WebSocket connections
-> - **FastAPI routing order**: StaticFiles mount must be defined after WebSocket endpoints
-> - **xterm.js v5 package name**: Use `@xterm/addon-fit` instead of `xterm-addon-fit`
 
-Below is my implementation result from a single-shot prompt.
+## Copilot Code Review — Code Review with Multiple Models
+Duration: 30
 
-![Copilot Web Relay Implementation Result](github-copilot-workshop/img/copilot-web-relay2.png)
+Once the Copilot Web Relay implementation is complete, use the **review-related Copilot CLI commands** to conduct code reviews with multiple AI models. The goal is to identify quality, security, and performance issues from the different perspectives of multiple models.
+
+### Key Commands for Reviews
+
+Copilot CLI provides several commands that you can use for code reviews.
+
+| Command | Description |
+|---|---|
+| `/review` | Run the code review agent to analyze changes |
+| `/model` | Select the AI model to use (Claude, GPT, Gemini, etc.) |
+| `/undo` | Rewind the previous turn and revert file changes |
+
+### Step 1: Commit & Push the Code
+
+In Copilot CLI, enter the following prompt to commit and push the implementation:
+
+```
+Stage all of the implemented Copilot Web Relay code with git add, commit it with an appropriate commit message, push it to the feature/copilot-web-relay branch, and create a pull request to the main branch.
+```
+
+### Step 2: Review with Multiple Models & Comment on the Pull Request
+
+Enter the following prompt in Copilot CLI to run reviews with multiple models and post the results as a PR comment all at once:
+
+```
+/review Please review the Pull Request with each of the opus4.6 and GPT5.4 models, summarize the results, and leave the results as a comment on the Pull Request
+```
+
+With this prompt alone, the following actions are performed automatically:
+
+- Code review by **Claude Opus 4.6**
+- Code review by **GPT-5.4**
+- Integration and comparison of each model's review results
+- Posting a review comment on the Pull Request
+
+If there is a problem with the changes, you can use `/undo` to rewind the previous turn and revert the file changes.
+
+> aside positive
+>
+> **Benefits of Multi-Model Reviews**:
+> - **Claude**: Strong at detecting logical inconsistencies and edge cases
+> - **GPT**: Skilled at identifying a wide range of best practices
+>
+> Issues identified by multiple models are highly reliable and should be fixed first.
+
+> aside positive
+>
+> **When to Use CLI Reviews vs. Code Review on GitHub.com**:
+> - **`/review` (CLI)**: Immediately reviews local changes. It can detect issues early during development
+> - **Copilot Code Review**: Reviews pull request changes and leaves formal review comments. It is ideal for team review workflows
+>
+> Combining both helps ensure quality from the early stages of development.
 
 ## Understand & Improve the Code
 Duration: 20
 
-Let's have Copilot explain the code from the Vibe Coding implementation of Copilot Web Relay to deepen our understanding. Then we'll find issues and implement improvements.
+Let's have Copilot explain the code of the Copilot SDK chat tool implemented through Vibe Coding to deepen our understanding. Then we'll find issues and implement improvements.
 
 ### 1. Request an Explanation of the Entire Codebase
 
 First, let's get an overview of the implemented code. Enter the following prompt in Agent Mode:
 
 ```
-Please review the entire codebase of this Copilot Web Relay application and explain the architecture, the role of each file, and the main processing flows.
+Please review the entire codebase of the AI chat application under copilotWebRelay/ and explain the architecture, the role of each file, and the main processing flows. Focus especially on how the Copilot SDK is used (CopilotClient, createSession, and streaming responses).
 ```
 
 The Copilot agent will automatically scan files in the project and explain the code structure and processing flows.
@@ -914,17 +874,17 @@ The Copilot agent will automatically scan files in the project and explain the c
 Next, let's have Copilot identify issues from a code quality and security perspective:
 
 ```
-Looking at this Copilot Web Relay application as a whole, what issues or areas for improvement do you see? Please analyze from the perspectives of design patterns, code quality, maintainability, and security.
+Looking at the application under copilotWebRelay/ as a whole, what issues or areas for improvement do you see? Please analyze from the perspectives of design patterns, code quality, maintainability, and security.
 ```
 
 You can also drill down into specific components:
 
 ```
-Are there any issues with the error handling and resource management in backend/cli_bridge.py? Please suggest improvements.
+Are there any issues with the backend WebSocket server and Copilot SDK session management? Please suggest improvements to error handling and resource management.
 ```
 
 ```
-Are there any issues with the WebSocket connection management in frontend/src/App.tsx? Please check whether it follows React best practices.
+Are there any issues with the frontend WebSocket connection management or the display of streaming responses? Please check whether it follows React best practices.
 ```
 
 ### 3. Implement the Improvements
@@ -960,6 +920,7 @@ In this workshop, you learned the following:
 2. **Code explanation and improvement with Agent Mode**
 3. **Spec-driven development — controlling AI while implementing**
 4. **AI-driven development using powerful models and tools**
+5. **Building AI-powered applications with the Copilot SDK**
 
 ### Next Steps
 
@@ -972,3 +933,5 @@ In this workshop, you learned the following:
 
 - [GitHub Copilot Documentation](https://docs.github.com/copilot)
 - [GitHub Copilot Best Practices](https://docs.github.com/copilot/using-github-copilot/best-practices-for-using-github-copilot)
+
+Great work!
