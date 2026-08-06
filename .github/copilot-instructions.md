@@ -2,36 +2,16 @@
 
 - Do not edit `github-copilot-workshop/index.html` (version selector)
 - Do not directly edit `github-copilot-workshop/versions/*/index.html` (content for each version) either
-- When updating content, always edit `workshop.md`
+- When updating standard workshop content, always edit `workshop.md`
+- When updating a customer-specific variant, edit the corresponding `workshop-<NAME>.md` source
 
-## Steps to Update workshop.md
+## Workshop Export
 
-1. Edit `workshop.md`
-2. Update the latest version with the following commands:
+After editing workshop Markdown, follow `.agents/skills/export-workshop/SKILL.md` and use the Makefile-based export flow.
 
-```bash
-# Generate in a temporary folder
-claat export -o ./temp-export workshop.md
+- Run `make export` to export `workshop.md` to the default version from `github-copilot-workshop/versions.json`
+- Run `make export VERSION=v1.0.4` to export the standard workshop to a specific version
+- Run `make export-custom NAME=nri` to export `workshop-nri.md` to `github-copilot-workshop/custom/nri/index.html`
+- Use the same custom command with `NAME=denso` for the DENSO variant
 
-# Set the latest version number (e.g., v1.0.1)
-LATEST_VERSION="v1.0.1"
-
-# Copy to the latest version folder
-cp temp-export/github-copilot-workshop/index.html "github-copilot-workshop/versions/${LATEST_VERSION}/index.html"
-
-# Fix image paths (to display correctly inside iframes)
-sed -i '' 's|src="img/|src="../../img/|g' "github-copilot-workshop/versions/${LATEST_VERSION}/index.html"
-
-# Update with new images if any
-cp -r temp-export/github-copilot-workshop/img/* github-copilot-workshop/img/ 2>/dev/null || true
-
-# Delete the temporary folder
-rm -rf temp-export
-
-echo "✅ Update for ${LATEST_VERSION} is complete"
-```
-
-3. When releasing a new version:
-   - Create a new version folder (e.g., `versions/v1.0.2/`)
-   - Update `versions.json` to add the new version
-   - Change `defaultVersion` to the new version
+When releasing a new standard version, run `make export VERSION=<new-version>`, add the new version to the beginning of the `versions` array in `github-copilot-workshop/versions.json`, and set `defaultVersion` to the new version.
