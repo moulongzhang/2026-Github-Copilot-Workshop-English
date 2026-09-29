@@ -22,8 +22,13 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  # Single deploy job since we're just deploying
+  test:
+    permissions:
+      contents: read
+    uses: ./.github/workflows/codelab-tests.yml
+
   deploy:
+    needs: test
     timeout-minutes: 15
     environment:
       name: github-pages

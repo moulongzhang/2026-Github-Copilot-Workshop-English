@@ -70,7 +70,7 @@ feedback link: https://example.com/feedback
 
 ### 2. Generating HTML
 
-The `Makefile` exports Codelabs-formatted HTML, copies it to the correct output directory, fixes image paths, copies new images, and removes temporary files.
+The `Makefile` exports Codelabs-formatted HTML, copies it to the correct output directory, fixes image and runtime paths, copies new images, and removes temporary files. The Codelabs runtime is served from `github-copilot-workshop/assets/codelab-elements/`, not the external `claat-public` bucket, so a bucket outage cannot remove the workshop's navigation controls.
 
 Export the standard workshop to the default version specified by `defaultVersion` in `github-copilot-workshop/versions.json`:
 
@@ -123,6 +123,23 @@ Open `http://localhost:9090` in your browser to view the generated workshop.
 | `make export` | Export `workshop.md` to the current default version |
 | `make export VERSION=<version>` | Export `workshop.md` to a specified version |
 | `make export-custom NAME=<name>` | Export `workshop-<name>.md` to the matching custom output directory |
+| `make fix-codelab-runtime` | Switch existing standard/custom exports to the local runtime without changing their content |
+| `make test` | Check runtime assets, repair idempotence, and all Markdown export paths (Python 3, Go, and jq required) |
+| `make test-browser` | Check desktop/mobile navigation and version selection in Chromium (Python Playwright required) |
+
+The runtime matches the claat revision in `go.mod`; its provenance and license are recorded in [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md). Keep the runtime and claat revision in sync when upgrading.
+
+To run the browser regression tests:
+
+```bash
+python3 -m pip install -r tests/requirements.txt
+python3 -m playwright install chromium
+make test-browser
+```
+
+If Google Chrome is already installed, use `PLAYWRIGHT_CHANNEL=chrome make test-browser` instead of downloading Chromium. Tests serve the repository under a GitHub Pages-style project path and block external runtime requests, exercising all standard and custom workshops without relying on the failed bucket.
+
+The protected version-selector HTML is unchanged. Its unused external Codelabs stylesheet may still fail to load; the actual workshop UI runs in the iframe and uses only the local runtime.
 
 ### 5. Other Useful claat Commands
 
@@ -155,6 +172,7 @@ go tool claat export *.md
 ├── github-copilot-workshop/
 │   ├── index.html               # Version selector; do not edit directly
 │   ├── versions.json            # Version metadata and default version
+│   ├── assets/codelab-elements/  # Pinned, self-hosted Codelabs runtime
 │   ├── versions/
 │   │   └── <VERSION>/
 │   │       └── index.html       # Generated standard workshop
@@ -186,12 +204,7 @@ Do not edit `github-copilot-workshop/index.html` or generated files under `githu
 
 The contents of the generated `github-copilot-workshop/` directory can be deployed to GitHub Pages or any web server.
 
-### Example: Deploying to GitHub Pages
-
-```bash
-# Push the contents of the github-copilot-workshop/ directory to the gh-pages branch
-git subtree push --prefix github-copilot-workshop origin gh-pages
-```
+The Pages workflow (`.github/workflows/static.yml`) publishes the committed repository on pushes to `main` or a manual dispatch. Deployment waits for the shared Codelabs regression workflow to pass, including real exports and desktop/mobile browser checks. Pull requests run the same checks without deploying.
 
 ## 📖 Reference Links
 
